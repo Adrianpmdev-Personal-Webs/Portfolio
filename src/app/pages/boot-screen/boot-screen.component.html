@@ -1,0 +1,26 @@
+<section
+  #screen
+  class="xp-saver"
+  matRipple
+  [matRippleColor]="'rgba(255,255,255,0.24)'"
+  (click)="enterLoginOrDesktop()"
+>
+  <div class="scanlines"></div>
+
+  <div class="boot-content">
+    <img
+      class="boot-logo"
+      src="assets/images/system/logo_xp.png"
+      [attr.alt]="'common.logoAlt' | translate"
+      width="220"
+      height="220"
+    />
+
+    <h1 class="boot-title">{{ 'app.name' | translate }}</h1>
+    <p class="boot-hint">{{ 'common.actions.clickToStart' | translate }}</p>
+  </div>
+
+  @if (booting) {
+    <mat-progress-bar class="xp-progress" mode="indeterminate"></mat-progress-bar>
+  }
+</section>

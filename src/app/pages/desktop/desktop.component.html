@@ -1,0 +1,66 @@
+<section class="desktop-screen" role="main" aria-label="Desktop">
+  <div class="desktop-icons">
+    @for (app of desktopIcons; track app.id) {
+      <app-desktop-icon
+        label="{{ app.titleKey | translate }}"
+        [iconSrc]="app.iconSrc"
+        (select)="openApp(app.id)">
+      </app-desktop-icon>
+    }
+  </div>
+
+  <div class="desktop-windows">
+    @for (win of windows(); track win.id) {
+      @if (win.state === 'open') {
+        <section
+          class="desktop-window"
+          [attr.data-window-id]="win.id"
+          [class.desktop-window--active]="win.active"
+          [class.desktop-window--opening]="isPendingOpenAnimation(win.id)"
+          [style.z-index]="win.zIndex"
+          (mousedown)="focusWindow(win.id)"
+        > 
+          <header class="desktop-window__header">
+            <span class="desktop-window__title">{{ win.titleKey | translate }}</span>
+
+            <div class="desktop-window__actions">
+              <button type="button" class="xp-win-btn" (click)="minimizeWindow(win.id)">_</button>
+              <button type="button" class="xp-win-btn xp-win-btn--close" (click)="closeWindow(win.id)">x</button>
+            </div>
+          </header>
+
+          <div class="desktop-window__body">
+            @switch (win.appType) {
+              @case ('my-pc') {
+                <app-my-pc />
+              }
+              @case ('internet-explorer') {
+                <app-internet-explorer />
+              }
+              @case ('photo-viewer') {
+                <app-photo-viewer />
+              }
+              @case ('minesweeper') {
+                <app-minesweeper />
+              }
+              
+              @default {
+                <p class="desktop-window__placeholder">{{ win.content }}</p>
+              }
+            }
+          </div>
+        </section>
+      }
+    }
+  </div>
+
+  <app-xp-taskbar
+    [windows]="windows()"
+    [startMenuApps]="desktopIcons"
+    [userName]="userName"
+    (windowTabClick)="onTaskbarTabClick($event)"
+    (startApp)="openApp($event)"
+    (logout)="onLogout()"
+    (turnOff)="onTurnOff()">
+  </app-xp-taskbar>
+</section>

@@ -1,0 +1,82 @@
+:host {
+  display: block;
+  width: 100%;
+  height: 100dvh;
+}
+
+.xp-saver {
+  --xp-blue-1: #8db6e8;
+  --xp-blue-2: #2c5ea8;
+  --xp-blue-3: #173f79;
+
+  position: relative;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  overflow: hidden;
+  user-select: none;
+  background:
+    radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.6), transparent 35%),
+    radial-gradient(circle at 75% 30%, rgba(255, 255, 255, 0.44), transparent 40%),
+    linear-gradient(170deg, var(--xp-blue-1) 0%, var(--xp-blue-2) 55%, var(--xp-blue-3) 100%);
+  display: grid;
+  place-items: center;
+}
+
+.scanlines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(10, 20, 40, 0.12) 0px,
+    rgba(10, 20, 40, 0.12) 1px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 3px
+  );
+  mix-blend-mode: soft-light;
+  opacity: 0.55;
+}
+
+.boot-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  padding-inline: 1rem;
+}
+
+.boot-logo {
+  width: clamp(140px, 20vw, 220px);
+  height: auto;
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 14px 28px rgba(0, 0, 0, 0.35));
+}
+
+.boot-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.boot-hint {
+  margin-top: 0.65rem;
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  animation: hintPulse 1.7s ease-in-out infinite;
+}
+
+.xp-progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@keyframes hintPulse {
+  0%, 100% { opacity: 0.42; }
+  50% { opacity: 1; }
+}

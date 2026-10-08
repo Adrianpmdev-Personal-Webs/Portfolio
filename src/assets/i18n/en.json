@@ -1,0 +1,172 @@
+{
+  "app": {
+    "name": "Adrianpmdev XP"
+  },
+  
+  "common": {
+    "logoAlt": "Portfolio logo",
+    "avatarAlt": "Profile avatar",
+    "actions": {
+      "clickToStart": "click to start",
+      "start": "Start",
+      "help": "Help",
+      "language": "Language",
+      "logout": "Log out",
+      "turnOffComputer": "Turn off computer"
+    },
+    "status": {
+      "loading": "Loading...",
+      "time": "Current time"
+    },
+    "validation": {
+      "required": "This field is required",
+      "minName": "Enter at least 2 characters"
+    },
+    "projects": "Projects",
+    "description": "Description",
+    "images": "Images",
+    "projectStatus": {
+      "online": "Online",
+      "wip": "Work in progress"
+    },
+    "languages": {
+      "es": "Spanish",
+      "en": "English",
+      "fr": "French"
+    },
+    "startMenu": {
+      "allPrograms": "All Programs",
+      "myComputer": "My Computer",
+      "myPictures": "My Pictures",
+      "internet": "Internet",
+      "helpSupport": "Help and Support",
+      "search": "Search",
+      "run": "Run...",
+      "back": "Back"
+    }
+  },
+
+  "login": {
+    "leftHint": "To get started, enter your name",
+    "subtitle": "Enter your name to access the desktop",
+    "form": {
+      "nameLabel": "Guest",
+      "namePlaceholder": "Your name",
+      "submit": "Log in"
+    },
+    "welcomeMessage": "Welcome, {{name}}",
+    "footerLeft": "Turn off computer",
+    "footerRight": "After logging in, you will be able to access the desktop"
+  },
+
+  "desktop": {
+    "app1": "My Data",
+    "app2": "Web Pages",
+    "app3": "Mobile Applications",
+    "app4": "Minesweeper"
+  },
+
+  "myPc": {
+    "sidebar": {
+      "title": "System Tasks",
+      "systemInfo": "View system information",
+      "skills": "View main skills",
+      "contact": "Contact options"
+    },
+    "links": {
+      "title": "Quick Links",
+      "linkedin": "View LinkedIn",
+      "contact": "Contact",
+      "cv": "Download CV"
+    },
+    "profile": {
+      "title": "Professional Information",
+      "roleValue": "Multiplatform Developer",
+      "bio": "Fullstack Developer with a proactive and well-rounded profile; creative and team-oriented, with strong planning skills and a high degree of flexibility and adaptability to take on new challenges and changing environments.",
+      "detailsTitle": "Basic Information",
+      "locationLabel": "Location",
+      "locationValue": "Mérida, Extremadura, Spain",
+      "emailLabel": "Email",
+      "focusLabel": "Specialization",
+      "birthLabel": "Date of birth",
+      "birthValue": "03/07/2000",
+      "phoneLabel": "Phone"
+    },
+    "skills": {
+      "title": "Main Stack"
+    },
+    "languages": {
+      "title": "Languages",
+      "spanish": "Spanish - Native",
+      "english": "English - Advanced (no official certification)"
+    },
+    "career": {
+      "title": "Experience and Education",
+      "experienceTitle": "Experience",
+      "experience1": "Plexus Tech - Internship (2025 - 2026)",
+      "educationTitle": "Education",
+      "education1": "Higher Technician Diploma in Multiplatform Application Development (Honor Distinction)."
+    }
+  },
+
+  "internetExplorer": {
+    "toolbar": {
+      "back": "Back",
+      "forward": "Forward",
+      "refresh": "Refresh",
+      "home": "Home",
+      "address": "Address",
+      "go": "Go"
+    },
+    "actions": {
+      "openSite": "Open site",
+      "viewCode": "View code"
+    },
+    "status": {
+      "ready": "Ready",
+      "opening": "Opening project...",
+      "hoverOpen": "Open deployment",
+      "hoverRepo": "Open repository",
+      "projectSelected": "Project selected"
+    },
+    "projects": {
+      "project1": {
+        "title": "The Witcher Web",
+        "summary": "A simple browser game inspired by The Witcher universe, featuring a small gameplay loop, sprite-style graphics and basic state management. Developed as an educational project."
+      },
+      "project2": {
+        "title": "Portfolio",
+        "summary": "A Windows XP-style personal portfolio showcasing projects, skills and resume, with multilingual support and subtle visual details."
+      },
+      "project3": {
+        "title": "Eventvs Mérida",
+        "summary": "Landing page for the Eventvs Mérida application, developed as a Final Degree Project."
+      }
+    }
+  },
+
+  "photoViewer": {
+    "projects": {
+      "spotify": "Android application inspired by Spotify, featuring registration, login, songs, playlists and profile. Integrates Firebase, Supabase Storage and the Deezer API. Developed as an educational project.",
+      "eventvs": "Mobile application for discovering leisure and cultural activities in Mérida, featuring events, map, calendar and sections of interest. Final Degree Project."
+    },
+    "shots": {
+      "login": "Login screen",
+      "register": "Registration screen",
+      "home": "Home screen",
+      "profile": "Profile screen",
+      "splash": "Splash screen",
+      "songs": "Songs screen",
+      "player": "Music player screen",
+      "map": "Map screen",
+      "calendar": "Calendar screen",
+      "events": "Saved events screen",
+      "account": "Account screen",
+      "details": "Event details screen"
+    }
+  },
+
+  "minesweeper": {
+    "touchHint": "Press and hold to place/remove a flag."
+  }
+}

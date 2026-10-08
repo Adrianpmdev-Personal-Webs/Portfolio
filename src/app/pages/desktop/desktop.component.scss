@@ -1,0 +1,177 @@
+:host {
+  display: block;
+  height: 100dvh;
+  width: 100%;
+}
+
+.desktop-screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background-image: url('/assets/images/system/background_xp.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+.desktop-icons {
+  position: absolute;
+  left: 28px;
+  top: 34px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  align-items: center;
+  pointer-events: auto;
+  z-index: 2;
+}
+
+.desktop-windows {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  pointer-events: none;
+}
+
+.desktop-window {
+  position: absolute;
+  left: 50%;
+  top: calc((100dvh - 39px) / 2);
+  transform: translate(-50%, -50%);
+  width: min(1100px, 92vw);
+  height: 650px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
+  border: 1px solid #6b95d7;
+  background: linear-gradient(180deg, #fbfdff 0%, #edf3ff 100%);
+  box-shadow: 0 16px 38px rgba(5, 17, 44, 0.45);
+  pointer-events: auto;
+  overflow: hidden;
+  transform-origin: center center;
+  will-change: transform, opacity;
+}
+
+.desktop-window--active {
+  box-shadow: 0 16px 38px rgba(5, 17, 44, 0.58);
+}
+
+.desktop-window__header {
+  height: 34px;
+  padding: 0 0.55rem 0 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  background: linear-gradient(180deg, #2f73e2 0%, #1f5cc8 100%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+}
+
+.desktop-window__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+.desktop-window__actions {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.xp-win-btn {
+  width: 22px;
+  height: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1;
+  background: linear-gradient(180deg, #4f8def 0%, #2a66cb 100%);
+  cursor: pointer;
+}
+
+.xp-win-btn--close {
+  background: linear-gradient(180deg, #ef7a6f 0%, #d34c3f 100%);
+  border-color: rgba(255, 255, 255, 0.45);
+}
+
+.desktop-window__body {
+  flex: 1;
+  min-height: 0;
+  height: 100%;
+  background: #ffffff;
+}
+
+.desktop-window__placeholder {
+  margin: 0;
+  padding: 1rem;
+  color: #1f2b42;
+  font-size: 0.95rem;
+}
+
+.desktop-window--opening {
+  opacity: 0;
+}
+
+@media (max-width: 900px) {
+  .desktop-window {
+    width: min(96vw, 620px);
+    height: 420px;
+    top: 46%;
+  }
+}
+
+@media (max-width: 720px) {
+  .desktop-icons {
+    left: 18px;
+    top: 20px;
+    gap: 0.9rem;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    max-height: calc(100dvh - 96px - env(safe-area-inset-bottom, 0px));
+  }
+
+  /*
+   * Por debajo de 720px las ventanas XP dejan de "flotar": pasan a ocupar
+   * toda la pantalla, una encima de otra, igual que pantallas nativas de
+   * una app móvil. El z-index que ya gestiona WindowManagerService decide
+   * cuál se ve; el resto queda apilada debajo, lista para recuperarse desde
+   * la taskbar sin perder su estado. Se reserva el alto exacto de la
+   * taskbar (39px) para que la ventana fullscreen nunca la tape, sin
+   * depender de que su z-index gane a la taskbar.
+   */
+  .desktop-window {
+    position: fixed;
+    inset: 0;
+    top: 0;
+    left: 0;
+    bottom: 39px;
+    transform: none;
+    width: 100vw;
+    height: auto;
+    border-radius: 0;
+    border-width: 0;
+    box-shadow: none;
+  }
+
+  .desktop-window__header {
+    height: 46px;
+    padding: 0 0.4rem 0 0.85rem;
+  }
+
+  .desktop-window__title {
+    font-size: 1rem;
+  }
+
+  .xp-win-btn {
+    width: 34px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .desktop-window {
+    bottom: calc(42px + env(safe-area-inset-bottom, 0px));
+  }
+}

@@ -1,0 +1,6 @@
+<button class="desktop-icon" type="button" (click)="onActivate()" [attr.aria-label]="label" [class.has-icon]="!!iconSrc">
+  <span class="desktop-icon__media">
+    <img class="desktop-icon__img" [class.desktop-icon__img--photo]="iconSrc?.includes('photo_viewer')" [src]="iconSrc" [alt]="label" />
+  </span>
+  <span class="desktop-icon__label">{{ label }}</span>
+</button>

@@ -1,0 +1,113 @@
+@use "@angular/material" as mat;
+
+:root {
+  --font-ui: Tahoma, "Trebuchet MS", Verdana, sans-serif;
+  --font-title: "Trebuchet MS", Tahoma, Verdana, sans-serif;
+}
+
+html {
+  @include mat.theme((
+    color: (
+      theme-type: light,
+      primary: mat.$azure-palette,
+      tertiary: mat.$blue-palette,
+    ),
+    typography: Tahoma,
+    density: 0,
+  ));
+}
+
+html,
+body {
+  height: 100%;
+  background: #2c5ea8;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  /* Evita el "bounce"/scroll elástico de iOS fuera del área de la app. */
+  overscroll-behavior: none;
+}
+
+/*
+ * El simulador de XP depende de gestos táctiles precisos (arrastrar,
+ * pulsación larga en el Buscaminas, tabs de la taskbar). Estas reglas
+ * quitan el resaltado azul al tocar y el retraso de 300ms del navegador
+ * antes de disparar "click", para que se sienta a la misma velocidad
+ * que una app nativa.
+ */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a[href],
+[role="button"],
+.clickable {
+  touch-action: manipulation;
+}
+
+app-root {
+  display: block;
+  width: 100%;
+  min-height: 100dvh;
+  background: #2c5ea8;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-title);
+}
+
+html, body, *:not(input):not(textarea):not(select):not(button):not(a):not([contenteditable="true"]) {
+  cursor: url("assets/images/system/xp-arrow.cur"), auto;
+}
+
+input, textarea, select, [contenteditable="true"] {
+  cursor: url("assets/images/system/xp-ibeam.cur"), text !important;
+}
+
+button, button *,
+a[href], a[href] *,
+[role="button"], [role="button"] *,
+.clickable, .clickable *,
+input[type="button"], input[type="submit"],
+.mat-button, .mat-button *,
+.mat-icon-button, .mat-icon-button * {
+  cursor: url("assets/images/system/xp-hand.cur"), pointer !important;
+}
+
+/**
+ * Fundido cruzado entre rutas (boot -> login -> escritorio), gestionado
+ * de forma nativa por el Router mediante la View Transitions API
+ * (ver `withViewTransitions()` en app.config.ts).
+ */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 260ms;
+  animation-timing-function: ease;
+}
+
+::view-transition-old(root) {
+  animation-name: route-fade-out;
+  animation-duration: 180ms;
+}
+
+::view-transition-new(root) {
+  animation-name: route-fade-in;
+}
+
+@keyframes route-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes route-fade-in {
+  from {
+    opacity: 0;
+  }
+}

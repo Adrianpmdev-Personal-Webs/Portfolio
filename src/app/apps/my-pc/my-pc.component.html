@@ -1,0 +1,186 @@
+<div class="my-pc">
+  <button
+    class="my-pc__menu-button"
+    type="button"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="isMenuOpen"
+    aria-label="Abrir menú"
+  >
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+
+  <div
+    class="my-pc__backdrop"
+    [class.my-pc__backdrop--visible]="isMenuOpen"
+    (click)="closeMenu()"
+  ></div>
+
+  <aside
+    class="my-pc__sidebar"
+    [class.my-pc__sidebar--open]="isMenuOpen"
+  >
+    <div class="xp-panel">
+      <h3>{{ 'myPc.sidebar.title' | translate }}</h3>
+
+      <ul>
+        <li>{{ 'myPc.sidebar.systemInfo' | translate }}</li>
+        <li>{{ 'myPc.sidebar.skills' | translate }}</li>
+        <li>{{ 'myPc.sidebar.contact' | translate }}</li>
+      </ul>
+    </div>
+
+    <div class="xp-panel">
+      <h3>{{ 'myPc.links.title' | translate }}</h3>
+
+      <a
+        href="https://www.linkedin.com/in/adrián-pérez-morales-493784410"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="onLinkedinClick()"
+      >
+        {{ 'myPc.links.linkedin' | translate }}
+      </a>
+
+      <a href="mailto:adrianperez936@gmail.com">
+        {{ 'myPc.links.contact' | translate }}
+      </a>
+
+      <a
+        href="/assets/docs/Adrian_Perez.pdf"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="onCvDownload()"
+      >
+        {{ 'myPc.links.cv' | translate }}
+      </a>
+    </div>
+  </aside>
+
+  <main class="my-pc__content">
+    <header class="my-pc__header">
+      <img
+        src="/assets/images/system/avatar_xp.jpg"
+        [alt]="'common.avatarAlt' | translate"
+      />
+
+      <div class="my-pc__header-info">
+        <h2>Adri&aacute;n P&eacute;rez Morales</h2>
+        <p>{{ 'myPc.profile.roleValue' | translate }}</p>
+      </div>
+    </header>
+
+    <div class="my-pc__sections">
+      <section class="xp-block">
+        <h4>{{ 'myPc.profile.title' | translate }}</h4>
+        <p>{{ 'myPc.profile.bio' | translate }}</p>
+      </section>
+
+      <section class="xp-grid">
+        <div class="xp-block">
+          <h4>{{ 'myPc.profile.detailsTitle' | translate }}</h4>
+
+          <div class="xp-detail-list">
+            <p>
+              <span>🌍</span>
+              <strong>{{ 'myPc.profile.locationLabel' | translate }}:</strong> 
+              {{ 'myPc.profile.locationValue' | translate }}
+            </p>
+
+            <p>
+              <span>📧</span>
+              <strong>{{ 'myPc.profile.emailLabel' | translate }}:</strong>
+              adrianperez936&#64;gmail.com
+            </p>
+
+            <p>
+              <span>🎂</span>
+              <strong>{{ 'myPc.profile.birthLabel' | translate }}:</strong>
+              {{ 'myPc.profile.birthValue' | translate }}
+            </p>
+
+            <p>
+              <span>📞</span>
+              <strong>{{ 'myPc.profile.phoneLabel' | translate }}:</strong>
+              +34 652 45 87 51
+            </p>
+
+            <p>
+              <span>🎯</span>
+              <strong>{{ 'myPc.profile.focusLabel' | translate }}:</strong>
+              Backend
+            </p>
+          </div>
+        </div>
+
+        <div class="xp-block">
+          <h4>{{ 'myPc.skills.title' | translate }}</h4>
+
+          <div class="xp-skills">
+            @for (skill of skills; track skill.label) {
+              <a
+                class="xp-skill"
+                [href]="skill.url"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {{ skill.label }}
+              </a>
+            }
+          </div>
+        </div>
+      </section>
+
+      <section class="xp-grid">
+        <div class="xp-block">
+          <h4>{{ 'myPc.languages.title' | translate }}</h4>
+
+          <div class="xp-language-list">
+            <div class="language">
+              <img
+                class="xp-flag"
+                src="/assets/images/flags/es.svg"
+                alt="Español"
+              />
+              <p>{{ 'myPc.languages.spanish' | translate }}</p>
+            </div>
+
+            <div class="language">
+              <img
+                class="xp-flag"
+                src="/assets/images/flags/en.svg"
+                alt="Inglés"
+              />
+              <p>{{ 'myPc.languages.english' | translate }}</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="xp-block">
+          <h4>{{ 'myPc.career.title' | translate }}</h4>
+
+          <div class="xp-career-list">
+            <div>
+              <p>
+                <strong>
+                  {{ 'myPc.career.experienceTitle' | translate }}
+                </strong>
+              </p>
+              <p>{{ 'myPc.career.experience1' | translate }}</p>
+            </div>
+
+            <div>
+              <p>
+                <strong>
+                  {{ 'myPc.career.educationTitle' | translate }}
+                </strong>
+              </p>
+              <p>{{ 'myPc.career.education1' | translate }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>

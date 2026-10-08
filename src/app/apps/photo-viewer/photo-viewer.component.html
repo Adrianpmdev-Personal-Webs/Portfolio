@@ -1,0 +1,149 @@
+<div class="pv-app">
+  <header class="pv-toolbar">
+    <div class="pv-toolbar__title">
+      <span>{{ selectedProject.name }} - {{ selectedProject.platform }}</span>
+    </div>
+
+    <div class="pv-toolbar__actions">
+      <button
+        type="button"
+        class="pv-btn"
+        (click)="prev()"
+        aria-label="Previous"
+      >
+        ◀
+      </button>
+
+      <button
+        type="button"
+        class="pv-btn"
+        (click)="next()"
+        aria-label="Next"
+      >
+        ▶
+      </button>
+
+      <button
+        type="button"
+        class="pv-btn"
+        (click)="zoomOut()"
+        aria-label="Zoom out"
+      >
+        −
+      </button>
+
+      <button
+        type="button"
+        class="pv-btn"
+        (click)="zoomIn()"
+        aria-label="Zoom in"
+      >
+        +
+      </button>
+
+      <button
+        type="button"
+        class="pv-menu-btn"
+        (click)="toggleProjectsMenu()"
+        [attr.aria-expanded]="isProjectsMenuOpen"
+        [attr.aria-label]="'common.projects' | translate"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="pv-layout">
+    <div
+      class="pv-menu-backdrop"
+      [class.pv-menu-backdrop--visible]="isProjectsMenuOpen"
+      (click)="closeProjectsMenu()"
+    ></div>
+
+    <aside
+      class="pv-projects"
+      [class.pv-projects--open]="isProjectsMenuOpen"
+    >
+      <div class="pv-projects__top">
+        <h3>{{ 'common.projects' | translate }}</h3>
+
+        <div class="pv-project-list">
+          @for (project of projects; track project.id) {
+            <button
+              type="button"
+              class="pv-project-item"
+              [class.pv-project-item--active]="project.id === selectedProjectId"
+              (click)="selectProject(project.id)"
+            >
+              <span class="pv-project-item__name">
+                {{ project.name }}
+              </span>
+
+              <span class="pv-project-item__meta">
+                {{ project.platform }} · {{ project.shots.length }}
+                {{ 'common.images' | translate }}
+              </span>
+
+              <span
+                class="pv-project-item__status"
+                [class.pv-project-item__status--wip]="project.status === 'wip'"
+              >
+                {{ project.status | projectStatusLabel | translate }}
+              </span>
+            </button>
+          }
+        </div>
+      </div>
+
+      <div class="pv-projects__bottom">
+        <h4>{{ 'common.description' | translate }}</h4>
+
+        <p class="pv-project-description">
+          {{ selectedProject.description | translate }}
+        </p>
+      </div>
+    </aside>
+
+    <main class="pv-viewer">
+      <div class="pv-viewer__frame">
+        <img
+          class="pv-viewer__image"
+          [src]="selectedShot.src"
+          [alt]="selectedShot.titleKey | translate"
+          [style.transform]="'scale(' + zoom + ')'"
+        />
+      </div>
+
+      <div class="pv-viewer__caption">
+        <strong>
+          {{ selectedShot.titleKey | translate }}
+        </strong>
+
+        <span class="pv-viewer__meta">
+          {{ selectedShotIndex + 1 }}/{{ selectedProject.shots.length }}
+          · {{ selectedShot.width }}x{{ selectedShot.height }}
+          · {{ zoomPercentage }}%
+        </span>
+      </div>
+    </main>
+
+    <aside class="pv-thumbs">
+      @for (shot of selectedProject.shots; track shot.id; let i = $index) {
+        <button
+          type="button"
+          class="pv-thumb"
+          [class.pv-thumb--active]="i === selectedShotIndex"
+          (click)="selectShot(i)"
+        >
+          <img
+            [src]="shot.src"
+            [alt]="shot.titleKey | translate"
+            loading="lazy"
+          />
+        </button>
+      }
+    </aside>
+  </div>
+</div>
