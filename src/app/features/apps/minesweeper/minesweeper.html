@@ -1,12 +1,12 @@
 <div class="ms-frame">
   <div class="ms-top">
-    <div class="ms-counter">{{ game.flagsLeft }}</div>
+    <div class="ms-counter">{{ view().flagsLeft }}</div>
     <button type="button" class="ms-face" (click)="newGame()">{{ face() }}</button>
-    <div class="ms-counter">{{ formattedTimer }}</div>
+    <div class="ms-counter">{{ formattedTimer() }}</div>
   </div>
 
   <div class="ms-board">
-    @for (row of game.board; let r = $index; track r) {
+    @for (row of view().board; let r = $index; track r) {
       <div class="ms-row">
         @for (cell of row; let c = $index; track c) {
           <button

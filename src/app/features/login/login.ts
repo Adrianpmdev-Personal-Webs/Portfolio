@@ -10,12 +10,14 @@
 import { TitleCasePipe } from '@angular/common';
 import {
   AfterViewInit,
+  ChangeDetectionStrategy,
   Component,
   DestroyRef,
   ElementRef,
   Injector,
   afterNextRender,
   inject,
+  signal,
 } from '@angular/core';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -34,6 +36,7 @@ type LoginState = 'form' | 'loading' | 'welcome';
   imports: [TitleCasePipe, ReactiveFormsModule, TranslatePipe, MatCardModule, MatProgressBarModule],
   templateUrl: './login.html',
   styleUrl: './login.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login implements AfterViewInit {
   private readonly router = inject(Router);
@@ -43,8 +46,8 @@ export class Login implements AfterViewInit {
   private readonly animations = gsap.context(() => {}, inject(ElementRef).nativeElement);
 
   protected readonly profile = PROFILE;
-  protected state: LoginState = 'form';
-  protected displayName = '';
+  protected readonly state = signal<LoginState>('form');
+  protected readonly displayName = signal('');
 
   protected readonly nameControl = new FormControl('', {
     nonNullable: true,
@@ -65,7 +68,7 @@ export class Login implements AfterViewInit {
   }
 
   protected submitName(): void {
-    if (this.state !== 'form') return;
+    if (this.state() !== 'form') return;
 
     const normalizedName = this.normalizeName(this.nameControl.value);
     const validationError = this.getValidationError(normalizedName);
@@ -76,9 +79,9 @@ export class Login implements AfterViewInit {
       return;
     }
 
-    this.displayName = normalizedName;
+    this.displayName.set(normalizedName);
     this.userSession.setUserName(normalizedName);
-    this.state = 'loading';
+    this.state.set('loading');
 
     this.animations.add(() => {
       gsap.to('.login-form-shell', { opacity: 0.5, duration: 0.2 });
@@ -92,7 +95,7 @@ export class Login implements AfterViewInit {
   }
 
   private showWelcome(): void {
-    this.state = 'welcome';
+    this.state.set('welcome');
 
     afterNextRender(
       () => {
@@ -100,7 +103,9 @@ export class Login implements AfterViewInit {
           gsap
             .timeline({
               onComplete: () => {
-                this.animations.add(() => gsap.delayedCall(2, () => this.router.navigateByUrl('/desktop')));
+                this.animations.add(() =>
+                  gsap.delayedCall(2, () => this.router.navigateByUrl('/desktop')),
+                );
               },
             })
             .fromTo(

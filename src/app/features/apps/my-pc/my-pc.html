@@ -3,7 +3,7 @@
     class="my-pc__menu-button"
     type="button"
     (click)="toggleMenu()"
-    [attr.aria-expanded]="isMenuOpen"
+    [attr.aria-expanded]="isMenuOpen()"
     [attr.aria-label]="'common.actions.openMenu' | translate"
   >
     <span></span>
@@ -13,14 +13,14 @@
 
   <div
     class="my-pc__backdrop"
-    [class.my-pc__backdrop--visible]="isMenuOpen"
+    [class.my-pc__backdrop--visible]="isMenuOpen()"
+    aria-hidden="true"
+    tabindex="-1"
     (click)="closeMenu()"
+    (keydown.escape)="closeMenu()"
   ></div>
 
-  <aside
-    class="my-pc__sidebar"
-    [class.my-pc__sidebar--open]="isMenuOpen"
-  >
+  <aside class="my-pc__sidebar" [class.my-pc__sidebar--open]="isMenuOpen()">
     <div class="xp-panel">
       <h3>{{ 'myPc.sidebar.title' | translate }}</h3>
 
@@ -47,12 +47,7 @@
         {{ 'myPc.links.contact' | translate }}
       </a>
 
-      <a
-        [href]="profile.cvUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        (click)="logCvDownload()"
-      >
+      <a [href]="profile.cvUrl" target="_blank" rel="noopener noreferrer" (click)="logCvDownload()">
         {{ 'myPc.links.cv' | translate }}
       </a>
     </div>
@@ -60,10 +55,7 @@
 
   <main class="my-pc__content">
     <header class="my-pc__header">
-      <img
-        src="/assets/images/system/avatar_xp.webp"
-        [alt]="'common.avatarAlt' | translate"
-      />
+      <img src="/assets/images/system/avatar_xp.webp" [alt]="'common.avatarAlt' | translate" />
 
       <div class="my-pc__header-info">
         <h2>{{ profile.fullName }}</h2>
@@ -84,7 +76,7 @@
           <div class="xp-detail-list">
             <p>
               <span>🌍</span>
-              <strong>{{ 'myPc.profile.locationLabel' | translate }}:</strong> 
+              <strong>{{ 'myPc.profile.locationLabel' | translate }}:</strong>
               {{ 'myPc.profile.locationValue' | translate }}
             </p>
 
@@ -119,12 +111,7 @@
 
           <div class="xp-skills">
             @for (skill of skills; track skill.label) {
-              <a
-                class="xp-skill"
-                [href]="skill.url"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
+              <a class="xp-skill" [href]="skill.url" target="_blank" rel="noopener noreferrer">
                 {{ skill.label }}
               </a>
             }
@@ -138,20 +125,12 @@
 
           <div class="xp-language-list">
             <div class="language">
-              <img
-                class="xp-flag"
-                src="/assets/images/flags/es.svg"
-                alt=""
-              />
+              <img class="xp-flag" src="/assets/images/flags/es.svg" alt="" />
               <p>{{ 'myPc.languages.spanish' | translate }}</p>
             </div>
 
             <div class="language">
-              <img
-                class="xp-flag"
-                src="/assets/images/flags/en.svg"
-                alt=""
-              />
+              <img class="xp-flag" src="/assets/images/flags/en.svg" alt="" />
               <p>{{ 'myPc.languages.english' | translate }}</p>
             </div>
           </div>

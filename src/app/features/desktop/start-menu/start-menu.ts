@@ -9,7 +9,14 @@
  */
 
 import { TitleCasePipe } from '@angular/common';
-import { Component, input, output, viewChild } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { MatMenu, MatMenuModule } from '@angular/material/menu';
 import { TranslatePipe } from '@ngx-translate/core';
 import { PROFILE } from '../../../shared/profile/profile-data';
@@ -20,6 +27,7 @@ import { AppDefinition } from '../../apps/app-definition';
   imports: [MatMenuModule, TranslatePipe, TitleCasePipe],
   templateUrl: './start-menu.html',
   styleUrl: './start-menu.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StartMenu {
   readonly menu = viewChild.required(MatMenu);
@@ -32,7 +40,7 @@ export class StartMenu {
   readonly turnOff = output<void>();
 
   protected readonly profile = PROFILE;
-  protected isAllProgramsOpen = false;
+  protected readonly isAllProgramsOpen = signal(false);
 
   protected launchAppById(id: string): void {
     const app = this.apps().find((item) => item.id === id);
@@ -40,11 +48,11 @@ export class StartMenu {
   }
 
   protected openAllPrograms(): void {
-    this.isAllProgramsOpen = true;
+    this.isAllProgramsOpen.set(true);
   }
 
   protected closeAllPrograms(): void {
-    this.isAllProgramsOpen = false;
+    this.isAllProgramsOpen.set(false);
   }
 
   protected openUrl(url: string): void {

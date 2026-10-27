@@ -8,7 +8,15 @@
  */
 
 import { UpperCasePipe } from '@angular/common';
-import { Component, DestroyRef, inject, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatMenuModule } from '@angular/material/menu';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -23,6 +31,7 @@ import { StartMenu } from '../start-menu/start-menu';
   imports: [MatButtonModule, MatMenuModule, TranslatePipe, UpperCasePipe, StartMenu],
   templateUrl: './taskbar.html',
   styleUrl: './taskbar.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Taskbar {
   private readonly languageSettings = inject(LanguageSettings);
@@ -38,7 +47,7 @@ export class Taskbar {
 
   protected readonly languages = SUPPORTED_LANGUAGES;
   protected readonly currentLang = this.languageSettings.currentLang;
-  protected time = this.formatTime();
+  protected readonly time = signal(this.formatTime());
 
   constructor() {
     const now = new Date();
@@ -46,8 +55,8 @@ export class Taskbar {
 
     let intervalId: ReturnType<typeof setInterval> | undefined;
     const timeoutId = setTimeout(() => {
-      this.time = this.formatTime();
-      intervalId = setInterval(() => (this.time = this.formatTime()), 60_000);
+      this.time.set(this.formatTime());
+      intervalId = setInterval(() => this.time.set(this.formatTime()), 60_000);
     }, msToNextMinute);
 
     inject(DestroyRef).onDestroy(() => {

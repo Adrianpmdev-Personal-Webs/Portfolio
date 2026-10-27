@@ -9,14 +9,14 @@
         src="assets/images/system/logo_xp.webp"
         [attr.alt]="'common.logoAlt' | translate"
       />
-      <p class="brand-line">{{ "app.name" | translate }}</p>
-      <p class="left-hint">{{ "login.leftHint" | translate }}</p>
+      <p class="brand-line">{{ 'app.name' | translate }}</p>
+      <p class="left-hint">{{ 'login.leftHint' | translate }}</p>
     </div>
 
     <div class="login-divider" aria-hidden="true"></div>
 
     <mat-card class="login-card">
-      @if (state !== "welcome") {
+      @if (state() !== 'welcome') {
         <div class="login-form-shell">
           <div class="xp-user-row">
             <img
@@ -27,11 +27,11 @@
 
             <div class="xp-user-panel">
               <p class="xp-username">
-                {{ "login.form.nameLabel" | translate }}
+                {{ 'login.form.nameLabel' | translate }}
               </p>
 
               <p class="xp-hint">
-                {{ "login.subtitle" | translate }}
+                {{ 'login.subtitle' | translate }}
               </p>
 
               <div class="xp-input-row">
@@ -47,7 +47,7 @@
                   class="xp-enter-btn"
                   type="button"
                   (click)="submitName()"
-                  [disabled]="nameControl.invalid || state === 'loading'"
+                  [disabled]="nameControl.invalid || state() === 'loading'"
                   [attr.aria-label]="'login.form.submit' | translate"
                 >
                   <span class="xp-enter-btn__arrow"></span>
@@ -64,26 +64,23 @@
                 </a>
               </div>
 
-              @if (nameControl.touched && nameControl.hasError("required")) {
+              @if (nameControl.touched && nameControl.hasError('required')) {
                 <p class="xp-error">
-                  {{ "common.validation.required" | translate }}
+                  {{ 'common.validation.required' | translate }}
                 </p>
               }
 
-              @if (nameControl.touched && nameControl.hasError("minlength")) {
+              @if (nameControl.touched && nameControl.hasError('minlength')) {
                 <p class="xp-error">
-                  {{ "common.validation.minName" | translate }}
+                  {{ 'common.validation.minName' | translate }}
                 </p>
               }
 
-              @if (state === "loading") {
-                <mat-progress-bar
-                  class="xp-progress"
-                  mode="indeterminate"
-                ></mat-progress-bar>
+              @if (state() === 'loading') {
+                <mat-progress-bar class="xp-progress" mode="indeterminate"></mat-progress-bar>
 
                 <p class="loading-label">
-                  {{ "common.status.loading" | translate }}
+                  {{ 'common.status.loading' | translate }}
                 </p>
               }
             </div>
@@ -91,7 +88,7 @@
         </div>
       }
 
-      @if (state === "welcome") {
+      @if (state() === 'welcome') {
         <div class="welcome-shell">
           <img
             class="xp-avatar"
@@ -100,7 +97,7 @@
           />
 
           <p>
-            {{ "login.welcomeMessage" | translate: { name: displayName } | titlecase }}
+            {{ 'login.welcomeMessage' | translate: { name: displayName() } | titlecase }}
           </p>
         </div>
       }
@@ -109,11 +106,7 @@
 
   <footer class="login-footer">
     <div class="login-footer__left">
-      <button
-        class="xp-power-btn xp-power-btn--off"
-        type="button"
-        (click)="turnOff()"
-      >
+      <button class="xp-power-btn xp-power-btn--off" type="button" (click)="turnOff()">
         <span class="xp-power-btn__icon-box" aria-hidden="true">
           <span class="xp-power-btn__icon-text"></span>
         </span>
@@ -126,7 +119,7 @@
 
     <div class="login-footer__right">
       <span class="login-footer__right-text">
-        {{ "login.footerRight" | translate }}
+        {{ 'login.footerRight' | translate }}
       </span>
     </div>
   </footer>

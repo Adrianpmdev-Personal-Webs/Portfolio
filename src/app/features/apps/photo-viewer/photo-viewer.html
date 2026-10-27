@@ -1,7 +1,7 @@
 <div class="pv-app">
   <header class="pv-toolbar">
     <div class="pv-toolbar__title">
-      <span>{{ selectedProject.name }} - {{ selectedProject.platform }}</span>
+      <span>{{ selectedProject().name }} - {{ selectedProject().platform }}</span>
     </div>
 
     <div class="pv-toolbar__actions">
@@ -45,7 +45,7 @@
         type="button"
         class="pv-menu-btn"
         (click)="toggleProjectsMenu()"
-        [attr.aria-expanded]="isProjectsMenuOpen"
+        [attr.aria-expanded]="isProjectsMenuOpen()"
         [attr.aria-label]="'common.projects' | translate"
       >
         <span></span>
@@ -58,14 +58,14 @@
   <div class="pv-layout">
     <div
       class="pv-menu-backdrop"
-      [class.pv-menu-backdrop--visible]="isProjectsMenuOpen"
+      [class.pv-menu-backdrop--visible]="isProjectsMenuOpen()"
+      aria-hidden="true"
+      tabindex="-1"
       (click)="closeProjectsMenu()"
+      (keydown.escape)="closeProjectsMenu()"
     ></div>
 
-    <aside
-      class="pv-projects"
-      [class.pv-projects--open]="isProjectsMenuOpen"
-    >
+    <aside class="pv-projects" [class.pv-projects--open]="isProjectsMenuOpen()">
       <div class="pv-projects__top">
         <h3>{{ 'common.projects' | translate }}</h3>
 
@@ -74,7 +74,7 @@
             <button
               type="button"
               class="pv-project-item"
-              [class.pv-project-item--active]="project.id === selectedProjectId"
+              [class.pv-project-item--active]="project.id === selectedProjectId()"
               (click)="selectProject(project.id)"
             >
               <span class="pv-project-item__name">
@@ -101,7 +101,7 @@
         <h4>{{ 'common.description' | translate }}</h4>
 
         <p class="pv-project-description">
-          {{ selectedProject.description | translate }}
+          {{ selectedProject().description | translate }}
         </p>
       </div>
     </aside>
@@ -110,38 +110,33 @@
       <div class="pv-viewer__frame">
         <img
           class="pv-viewer__image"
-          [src]="selectedShot.src"
-          [alt]="selectedShot.titleKey | translate"
-          [style.transform]="'scale(' + zoom + ')'"
+          [src]="selectedShot().src"
+          [alt]="selectedShot().titleKey | translate"
+          [style.transform]="'scale(' + zoom() + ')'"
         />
       </div>
 
       <div class="pv-viewer__caption">
         <strong>
-          {{ selectedShot.titleKey | translate }}
+          {{ selectedShot().titleKey | translate }}
         </strong>
 
         <span class="pv-viewer__meta">
-          {{ selectedShotIndex + 1 }}/{{ selectedProject.shots.length }}
-          · {{ selectedShot.width }}x{{ selectedShot.height }}
-          · {{ zoomPercentage }}%
+          {{ selectedShotIndex() + 1 }}/{{ selectedProject().shots.length }} ·
+          {{ selectedShot().width }}x{{ selectedShot().height }} · {{ zoomPercentage() }}%
         </span>
       </div>
     </main>
 
     <aside class="pv-thumbs">
-      @for (shot of selectedProject.shots; track shot.id; let i = $index) {
+      @for (shot of selectedProject().shots; track shot.id; let i = $index) {
         <button
           type="button"
           class="pv-thumb"
-          [class.pv-thumb--active]="i === selectedShotIndex"
+          [class.pv-thumb--active]="i === selectedShotIndex()"
           (click)="selectShot(i)"
         >
-          <img
-            [src]="shot.src"
-            [alt]="shot.titleKey | translate"
-            loading="lazy"
-          />
+          <img [src]="shot.src" [alt]="shot.titleKey | translate" loading="lazy" />
         </button>
       }
     </aside>

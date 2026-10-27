@@ -6,12 +6,13 @@
  * @author adrianpmdev
  */
 
-import { Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
 @Component({
   selector: 'app-desktop-icon',
   templateUrl: './desktop-icon.html',
   styleUrl: './desktop-icon.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class DesktopIcon {
   readonly label = input('');

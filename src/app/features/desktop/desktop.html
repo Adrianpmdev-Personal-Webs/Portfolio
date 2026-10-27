@@ -4,7 +4,8 @@
       <app-desktop-icon
         [label]="app.titleKey | translate"
         [iconSrc]="app.iconSrc"
-        (activate)="openApp(app)">
+        (activate)="openApp(app)"
+      >
       </app-desktop-icon>
     }
   </div>
@@ -29,6 +30,7 @@
     (windowTabClick)="toggleWindowFromTaskbar($event)"
     (appLaunch)="openApp($event)"
     (logout)="logout()"
-    (turnOff)="turnOff()">
+    (turnOff)="turnOff()"
+  >
   </app-taskbar>
 </section>

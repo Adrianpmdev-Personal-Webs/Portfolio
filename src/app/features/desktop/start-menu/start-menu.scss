@@ -288,7 +288,7 @@
 }
 
 .xp-power-btn__logout-icon::before {
-  content: "";
+  content: '';
   position: absolute;
   left: -6px;
   top: 4px;
@@ -299,7 +299,7 @@
 }
 
 .xp-power-btn__logout-icon::after {
-  content: "";
+  content: '';
   position: absolute;
   left: -7px;
   top: 1px;
@@ -319,7 +319,7 @@
 }
 
 .xp-power-btn__power-icon::before {
-  content: "";
+  content: '';
   position: absolute;
   top: -4px;
   left: 50%;
@@ -461,9 +461,7 @@
   .xp-start-menu {
     width: 100vw;
     height: min(72dvh, 560px);
-    max-height: calc(
-      100dvh - 42px - env(safe-area-inset-bottom, 0px)
-    );
+    max-height: calc(100dvh - 42px - env(safe-area-inset-bottom, 0px));
   }
 
   .xp-start-menu__header {

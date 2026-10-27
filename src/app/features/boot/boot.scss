@@ -77,6 +77,11 @@
 }
 
 @keyframes hintPulse {
-  0%, 100% { opacity: 0.42; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 1;
+  }
 }

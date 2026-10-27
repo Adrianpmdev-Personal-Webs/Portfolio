@@ -22,18 +22,11 @@
     <div class="xp-start-menu__body">
       <div
         class="xp-start-menu__left"
-        [class.xp-start-menu__left--hidden-responsive]="isAllProgramsOpen"
+        [class.xp-start-menu__left--hidden-responsive]="isAllProgramsOpen()"
       >
         @for (app of apps(); track app.id) {
-          <button
-            class="xp-start-item"
-            type="button"
-            (click)="appLaunch.emit(app)"
-          >
-            <img
-              [src]="app.iconSrc"
-              [attr.alt]="app.titleKey | translate"
-            />
+          <button class="xp-start-item" type="button" (click)="appLaunch.emit(app)">
+            <img [src]="app.iconSrc" [attr.alt]="app.titleKey | translate" />
 
             <span>
               {{ app.titleKey | translate }}
@@ -52,26 +45,20 @@
             {{ 'common.startMenu.allPrograms' | translate }}
           </span>
 
-          <span
-            class="xp-start-all-programs__arrow"
-            aria-hidden="true"
-          ></span>
+          <span class="xp-start-all-programs__arrow" aria-hidden="true"></span>
         </button>
       </div>
 
       <div
         class="xp-start-menu__right"
-        [class.xp-start-menu__right--visible-responsive]="isAllProgramsOpen"
+        [class.xp-start-menu__right--visible-responsive]="isAllProgramsOpen()"
       >
         <button
           class="xp-right-back"
           type="button"
           (click)="$event.stopPropagation(); closeAllPrograms()"
         >
-          <span
-            class="xp-right-back__arrow"
-            aria-hidden="true"
-          ></span>
+          <span class="xp-right-back__arrow" aria-hidden="true"></span>
 
           <span>
             {{ 'common.startMenu.back' | translate }}
@@ -80,67 +67,37 @@
 
         <div class="xp-right-sep"></div>
 
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="launchAppById('my-pc')"
-        >
+        <button class="xp-right-item" type="button" (click)="launchAppById('my-pc')">
           {{ 'common.startMenu.myComputer' | translate }}
         </button>
 
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="launchAppById('photo-viewer')"
-        >
+        <button class="xp-right-item" type="button" (click)="launchAppById('photo-viewer')">
           {{ 'common.startMenu.myPictures' | translate }}
         </button>
 
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="launchAppById('internet-explorer')"
-        >
+        <button class="xp-right-item" type="button" (click)="launchAppById('internet-explorer')">
           {{ 'common.startMenu.internet' | translate }}
         </button>
 
         <div class="xp-right-sep"></div>
 
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="openUrl('mailto:' + profile.email)"
-        >
+        <button class="xp-right-item" type="button" (click)="openUrl('mailto:' + profile.email)">
           {{ 'common.startMenu.helpSupport' | translate }}
         </button>
 
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="openUrl(profile.linkedinUrl)"
-        >
+        <button class="xp-right-item" type="button" (click)="openUrl(profile.linkedinUrl)">
           {{ 'common.startMenu.search' | translate }}
         </button>
 
-        <button
-          class="xp-right-item"
-          type="button"
-        >
+        <button class="xp-right-item" type="button">
           {{ 'common.startMenu.run' | translate }}
         </button>
       </div>
     </div>
 
     <div class="xp-start-menu__footer">
-      <button
-        class="xp-power-btn xp-power-btn--logout"
-        type="button"
-        (click)="logout.emit()"
-      >
-        <span
-          class="xp-power-btn__icon-box"
-          aria-hidden="true"
-        >
+      <button class="xp-power-btn xp-power-btn--logout" type="button" (click)="logout.emit()">
+        <span class="xp-power-btn__icon-box" aria-hidden="true">
           <span class="xp-power-btn__icon-text xp-power-btn__logout-icon"></span>
         </span>
 
@@ -149,15 +106,8 @@
         </span>
       </button>
 
-      <button
-        class="xp-power-btn xp-power-btn--off"
-        type="button"
-        (click)="turnOff.emit()"
-      >
-        <span
-          class="xp-power-btn__icon-box"
-          aria-hidden="true"
-        >
+      <button class="xp-power-btn xp-power-btn--off" type="button" (click)="turnOff.emit()">
+        <span class="xp-power-btn__icon-box" aria-hidden="true">
           <span class="xp-power-btn__icon-text xp-power-btn__power-icon"></span>
         </span>
 

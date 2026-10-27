@@ -51,15 +51,15 @@ The project combines a retro interface (**boot screen, login, desktop, windows a
 
 ## 🛠️ Tech Stack
 
-| Technology | Purpose |
-|------------|---------|
-| ![Angular](https://img.shields.io/badge/Angular_21-DD0031?style=flat-square&logo=angular&logoColor=white) | Core framework |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white) | Typed language |
-| ![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=sass&logoColor=white) | Styling |
-| ![Angular Material](https://img.shields.io/badge/Angular_Material-009688?style=flat-square&logo=angular&logoColor=white) | UI components |
-| ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=black) | Animations |
+| Technology                                                                                                                  | Purpose                                      |
+| --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
+| ![Angular](https://img.shields.io/badge/Angular_21-DD0031?style=flat-square&logo=angular&logoColor=white)                   | Core framework                               |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)             | Typed language                               |
+| ![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=sass&logoColor=white)                               | Styling                                      |
+| ![Angular Material](https://img.shields.io/badge/Angular_Material-009688?style=flat-square&logo=angular&logoColor=white)    | UI components                                |
+| ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=black)                          | Animations                                   |
 | ![ngx-translate](https://img.shields.io/badge/ngx--translate-4285F4?style=flat-square&logo=googletranslate&logoColor=white) | Internationalization (🇪🇸 ES / 🇬🇧 EN / 🇫🇷 FR) |
-| ![RxJS](https://img.shields.io/badge/RxJS-B7178C?style=flat-square&logo=reactivex&logoColor=white) | Reactive programming |
+| ![RxJS](https://img.shields.io/badge/RxJS-B7178C?style=flat-square&logo=reactivex&logoColor=white)                          | Reactive programming                         |
 
 ---
 
@@ -123,6 +123,21 @@ src/app/
 - 🔐 Client-side user session management to control the boot / login / desktop flow.
 - 🎭 Interface focused on the visual experience and the narrative of the portfolio.
 - 📱 **Responsive design**: on mobile, windows are displayed fullscreen and stacked, like native app screens.
+- ⚡ **Signals and OnPush**: component state lives in signals and every component uses `OnPush` change detection.
+
+---
+
+<br>
+
+## 🧑‍💻 Development
+
+| Command                | What it does                            |
+| ---------------------- | --------------------------------------- |
+| `npm start`            | Dev server at `http://localhost:4200`   |
+| `npm run build`        | Production build in `dist/`             |
+| `npm run lint`         | ESLint with angular-eslint rules        |
+| `npm run format`       | Format the project with Prettier        |
+| `npm run format:check` | Check formatting without changing files |
 
 ---
 

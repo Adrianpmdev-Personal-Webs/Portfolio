@@ -7,7 +7,15 @@
  * @author adrianpmdev
  */
 
-import { Component, DestroyRef, ElementRef, Injector, afterNextRender, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  Injector,
+  afterNextRender,
+  inject,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import gsap from 'gsap';
@@ -25,6 +33,7 @@ import { XpWindow } from './xp-window/xp-window';
   imports: [DesktopIcon, Taskbar, XpWindow, TranslatePipe],
   templateUrl: './desktop.html',
   styleUrl: './desktop.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Desktop {
   private readonly windowManager = inject(WindowManager);
@@ -61,11 +70,15 @@ export class Desktop {
   }
 
   protected minimizeWindow(id: string): void {
-    this.animateWindowOut(id, { duration: 0.22, scale: 0.92, y: 24 }, () => this.windowManager.minimizeWindow(id));
+    this.animateWindowOut(id, { duration: 0.22, scale: 0.92, y: 24 }, () =>
+      this.windowManager.minimizeWindow(id),
+    );
   }
 
   protected closeWindow(id: string): void {
-    this.animateWindowOut(id, { duration: 0.24, scale: 0.82, y: 36 }, () => this.windowManager.closeWindow(id));
+    this.animateWindowOut(id, { duration: 0.24, scale: 0.82, y: 36 }, () =>
+      this.windowManager.closeWindow(id),
+    );
   }
 
   protected toggleWindowFromTaskbar(id: string): void {

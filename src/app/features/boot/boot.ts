@@ -8,7 +8,15 @@
  */
 
 import { NgOptimizedImage } from '@angular/common';
-import { Component, DestroyRef, ElementRef, OnInit, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  ElementRef,
+  OnInit,
+  inject,
+  signal,
+} from '@angular/core';
 import { Router } from '@angular/router';
 import { MatRippleModule } from '@angular/material/core';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
@@ -23,6 +31,7 @@ import { UserSession } from '../../core/session/user-session';
   imports: [NgOptimizedImage, MatRippleModule, MatProgressBarModule, TranslatePipe],
   templateUrl: './boot.html',
   styleUrl: './boot.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Boot implements OnInit {
   private readonly router = inject(Router);
@@ -31,7 +40,7 @@ export class Boot implements OnInit {
   private readonly fullscreen = inject(Fullscreen);
   private readonly animations = gsap.context(() => {}, inject(ElementRef).nativeElement);
 
-  protected booting = false;
+  protected readonly booting = signal(false);
 
   constructor() {
     inject(DestroyRef).onDestroy(() => this.animations.kill());
@@ -48,10 +57,10 @@ export class Boot implements OnInit {
   }
 
   protected enterLoginOrDesktop(): void {
-    if (this.booting) return;
+    if (this.booting()) return;
     if (this.deviceDetector.isDesktop()) this.fullscreen.enter();
 
-    this.booting = true;
+    this.booting.set(true);
     const nextRoute = this.userSession.getUserName().trim() ? '/desktop' : '/login';
 
     this.animations.add(() => {

@@ -9,7 +9,15 @@
  */
 
 import { NgComponentOutlet } from '@angular/common';
-import { Component, Injector, computed, inject, input, output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  Injector,
+  computed,
+  inject,
+  input,
+  output,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { APP_WINDOW, AppWindow } from '../../apps/app-window';
 import { DesktopWindow } from '../desktop-window';
@@ -19,6 +27,7 @@ import { DesktopWindow } from '../desktop-window';
   imports: [NgComponentOutlet, TranslatePipe],
   templateUrl: './xp-window.html',
   styleUrl: './xp-window.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   host: {
     '[attr.data-window-id]': 'desktopWindow().id',
     '[class.xp-window--active]': 'desktopWindow().active',

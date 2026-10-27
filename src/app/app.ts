@@ -7,7 +7,7 @@
  * @author adrianpmdev
  */
 
-import { Component, OnInit, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LanguageSettings } from './core/i18n/language-settings';
 
@@ -16,6 +16,7 @@ import { LanguageSettings } from './core/i18n/language-settings';
   imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class App implements OnInit {
   private readonly languageSettings = inject(LanguageSettings);

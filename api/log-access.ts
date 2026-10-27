@@ -18,7 +18,16 @@ const MAX_USER_NAME_LENGTH = 40;
 const hits = new Map<string, number[]>();
 
 const DEVICES = ['movil', 'tablet', 'ordenador'] as const;
-const PLATFORMS = ['iPhone', 'iPad', 'Android', 'Windows', 'macOS', 'Linux', 'ChromeOS', 'Desconocido'] as const;
+const PLATFORMS = [
+  'iPhone',
+  'iPad',
+  'Android',
+  'Windows',
+  'macOS',
+  'Linux',
+  'ChromeOS',
+  'Desconocido',
+] as const;
 const LANGUAGES = ['es', 'en', 'fr'] as const;
 
 type LogEventType = 'desktop' | 'cv' | 'linkedin';
@@ -61,7 +70,10 @@ function oneOf<T extends string>(allowed: readonly T[], value: unknown): T | 'de
 
 function sanitizeUserName(value: unknown): string {
   if (typeof value !== 'string') return 'desconocido';
-  const clean = value.replace(/[\u0000-\u001f`*_~|>@]/g, '').trim().slice(0, MAX_USER_NAME_LENGTH);
+  const clean = value
+    .replace(/[\u0000-\u001f`*_~|>@]/g, '')
+    .trim()
+    .slice(0, MAX_USER_NAME_LENGTH);
   return clean || 'desconocido';
 }
 

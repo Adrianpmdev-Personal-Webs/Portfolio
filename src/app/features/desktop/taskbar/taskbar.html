@@ -6,11 +6,7 @@
     [matMenuTriggerFor]="startMenu.menu()"
     [attr.aria-label]="'common.actions.start' | translate"
   >
-    <img
-      class="xp-start__logo"
-      src="/assets/images/system/logo_xp.webp"
-      alt=""
-    />
+    <img class="xp-start__logo" src="/assets/images/system/logo_xp.webp" alt="" />
 
     <span class="xp-start__text">
       {{ 'common.actions.start' | translate }}
@@ -47,12 +43,8 @@
     </button>
   </div>
 
-  <div
-    class="xp-tray"
-    role="status"
-    [attr.aria-label]="'common.status.time' | translate"
-  >
-    <span class="xp-clock">{{ time }}</span>
+  <div class="xp-tray" role="status" [attr.aria-label]="'common.status.time' | translate">
+    <span class="xp-clock">{{ time() }}</span>
   </div>
 </nav>
 
@@ -65,23 +57,10 @@
   (turnOff)="turnOff.emit()"
 />
 
-<mat-menu
-  #langMenu="matMenu"
-  xPosition="before"
-  yPosition="above"
-  class="xp-lang-menu-panel"
->
+<mat-menu #langMenu="matMenu" xPosition="before" yPosition="above" class="xp-lang-menu-panel">
   @for (lang of languages; track lang) {
-    <button
-      mat-menu-item
-      type="button"
-      (click)="setLang(lang)"
-    >
-      <img
-        class="xp-flag"
-        [src]="'/assets/images/flags/' + lang + '.svg'"
-        alt=""
-      />
+    <button mat-menu-item type="button" (click)="setLang(lang)">
+      <img class="xp-flag" [src]="'/assets/images/flags/' + lang + '.svg'" alt="" />
 
       <span>
         {{ 'common.languages.' + lang | translate }}

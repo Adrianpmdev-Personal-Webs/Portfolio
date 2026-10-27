@@ -1,0 +1,6 @@
+dist
+.angular
+node_modules
+package-lock.json
+public/assets/images
+public/assets/docs

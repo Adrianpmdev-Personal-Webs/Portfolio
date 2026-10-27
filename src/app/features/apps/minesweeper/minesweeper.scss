@@ -224,11 +224,7 @@
   }
 
   .ms-frame {
-    --cell-size: clamp(
-      34px,
-      calc((100vw - 72px) / var(--cols)),
-      62px
-    );
+    --cell-size: clamp(34px, calc((100vw - 72px) / var(--cols)), 62px);
 
     max-width: 100%;
 
@@ -255,11 +251,7 @@
   }
 
   .ms-frame {
-    --cell-size: clamp(
-      30px,
-      calc((100vw - 52px) / var(--cols)),
-      52px
-    );
+    --cell-size: clamp(30px, calc((100vw - 52px) / var(--cols)), 52px);
 
     padding: 8px;
   }
@@ -301,11 +293,7 @@
   }
 
   .ms-frame {
-    --cell-size: clamp(
-      28px,
-      calc((100vw - 42px) / var(--cols)),
-      44px
-    );
+    --cell-size: clamp(28px, calc((100vw - 42px) / var(--cols)), 44px);
 
     padding: 6px;
   }

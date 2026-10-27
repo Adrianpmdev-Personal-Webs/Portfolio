@@ -127,7 +127,7 @@ export class MinesweeperEngine {
   }
 
   private revealFlood(sr: number, sc: number): void {
-    const stack: Array<[number, number]> = [[sr, sc]];
+    const stack: [number, number][] = [[sr, sc]];
     while (stack.length) {
       const [r, c] = stack.pop()!;
       const cell = this.board[r][c];

@@ -7,36 +7,63 @@
  * @author adrianpmdev
  */
 
-import { Component, OnDestroy } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  computed,
+  inject,
+  signal,
+} from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MinesweeperCell } from './minesweeper-cell';
 import { MinesweeperEngine } from './minesweeper-engine';
+
+const LONG_PRESS_MS = 420;
+const MAX_TIMER = 999;
+
+interface MinesweeperView {
+  board: MinesweeperCell[][];
+  flagsLeft: number;
+  gameOver: boolean;
+  win: boolean;
+}
 
 @Component({
   selector: 'app-minesweeper',
   imports: [TranslatePipe],
   templateUrl: './minesweeper.html',
   styleUrl: './minesweeper.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class Minesweeper implements OnDestroy {
-  private static readonly LONG_PRESS_MS = 420;
+export class Minesweeper {
+  private readonly game = new MinesweeperEngine();
 
-  protected readonly game = new MinesweeperEngine();
-  protected timer = 0;
+  protected readonly view = signal<MinesweeperView>(this.snapshot());
+  protected readonly timer = signal(0);
+  protected readonly formattedTimer = computed(() => String(this.timer()).padStart(3, '0'));
+  protected readonly face = computed(() => {
+    if (this.view().gameOver) return '😵';
+    if (this.view().win) return '😎';
+    return '🙂';
+  });
 
-  private timerId: number | undefined;
-  private longPressTimeoutId: number | undefined;
+  private timerId: ReturnType<typeof setInterval> | undefined;
+  private longPressTimeoutId: ReturnType<typeof setTimeout> | undefined;
   private longPressTriggered = false;
 
-  ngOnDestroy(): void {
-    this.stopTimer();
-    this.clearLongPress();
+  constructor() {
+    inject(DestroyRef).onDestroy(() => {
+      this.stopTimer();
+      this.clearLongPress();
+    });
   }
 
   protected newGame(): void {
     this.game.reset();
-    this.timer = 0;
     this.stopTimer();
+    this.timer.set(0);
+    this.refresh();
   }
 
   protected revealCell(r: number, c: number): void {
@@ -45,22 +72,23 @@ export class Minesweeper implements OnDestroy {
 
     if (!wasStarted && this.game.started) this.startTimer();
     if (this.game.finished) this.stopTimer();
+    this.refresh();
   }
 
   protected flagCell(event: MouseEvent, r: number, c: number): void {
     event.preventDefault();
-    this.game.toggleFlag(r, c);
+    this.toggleFlag(r, c);
   }
 
   protected startLongPress(event: TouchEvent, r: number, c: number): void {
     event.preventDefault();
     this.longPressTriggered = false;
     this.clearLongPress();
-    this.longPressTimeoutId = window.setTimeout(() => {
+    this.longPressTimeoutId = setTimeout(() => {
       this.longPressTriggered = true;
-      this.game.toggleFlag(r, c);
-      if (navigator.vibrate) navigator.vibrate(15);
-    }, Minesweeper.LONG_PRESS_MS);
+      this.toggleFlag(r, c);
+      navigator.vibrate?.(15);
+    }, LONG_PRESS_MS);
   }
 
   protected endLongPress(event: TouchEvent, r: number, c: number): void {
@@ -77,40 +105,42 @@ export class Minesweeper implements OnDestroy {
     this.clearLongPress();
   }
 
-  protected face(): string {
-    if (this.game.gameOver) return '😵';
-    if (this.game.win) return '😎';
-    return '🙂';
-  }
-
   protected cellText(cell: MinesweeperCell): string {
     if (!cell.revealed) return cell.flagged ? '🚩' : '';
     if (cell.mine) return '💣';
     return cell.adjacent > 0 ? String(cell.adjacent) : '';
   }
 
-  protected get formattedTimer(): string {
-    return String(this.timer).padStart(3, '0');
+  private toggleFlag(r: number, c: number): void {
+    this.game.toggleFlag(r, c);
+    this.refresh();
+  }
+
+  private refresh(): void {
+    this.view.set(this.snapshot());
+  }
+
+  private snapshot(): MinesweeperView {
+    return {
+      board: this.game.board.map((row) => row.map((cell) => ({ ...cell }))),
+      flagsLeft: this.game.flagsLeft,
+      gameOver: this.game.gameOver,
+      win: this.game.win,
+    };
   }
 
   private clearLongPress(): void {
-    if (this.longPressTimeoutId) {
-      clearTimeout(this.longPressTimeoutId);
-      this.longPressTimeoutId = undefined;
-    }
+    clearTimeout(this.longPressTimeoutId);
+    this.longPressTimeoutId = undefined;
   }
 
   private startTimer(): void {
     if (this.timerId) return;
-    this.timerId = window.setInterval(() => {
-      if (this.timer < 999) this.timer++;
-    }, 1000);
+    this.timerId = setInterval(() => this.timer.update((t) => Math.min(MAX_TIMER, t + 1)), 1000);
   }
 
   private stopTimer(): void {
-    if (this.timerId) {
-      clearInterval(this.timerId);
-      this.timerId = undefined;
-    }
+    clearInterval(this.timerId);
+    this.timerId = undefined;
   }
 }

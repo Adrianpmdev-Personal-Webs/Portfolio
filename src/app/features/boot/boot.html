@@ -1,8 +1,13 @@
 <section
   class="xp-saver"
+  role="button"
+  tabindex="0"
+  [attr.aria-label]="'common.actions.clickToStart' | translate"
   matRipple
   [matRippleColor]="'rgba(255,255,255,0.24)'"
   (click)="enterLoginOrDesktop()"
+  (keydown.enter)="enterLoginOrDesktop()"
+  (keydown.space)="$event.preventDefault(); enterLoginOrDesktop()"
 >
   <div class="scanlines"></div>
 
@@ -20,7 +25,7 @@
     <p class="boot-hint">{{ 'common.actions.clickToStart' | translate }}</p>
   </div>
 
-  @if (booting) {
+  @if (booting()) {
     <mat-progress-bar class="xp-progress" mode="indeterminate"></mat-progress-bar>
   }
 </section>

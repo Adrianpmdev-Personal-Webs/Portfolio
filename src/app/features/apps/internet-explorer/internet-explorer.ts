@@ -7,10 +7,9 @@
  * @author adrianpmdev
  */
 
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, signal } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectStatusLabelPipe } from '../../../shared/project-status/project-status-label-pipe';
-import { WebProject } from './web-project';
 import { WEB_PROJECTS } from './web-projects-data';
 
 @Component({
@@ -18,84 +17,82 @@ import { WEB_PROJECTS } from './web-projects-data';
   imports: [TranslatePipe, ProjectStatusLabelPipe],
   templateUrl: './internet-explorer.html',
   styleUrl: './internet-explorer.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(keydown.escape)': 'closeProjectsMenu()',
+  },
 })
 export class InternetExplorer {
   protected readonly projects = WEB_PROJECTS;
 
-  protected isProjectsMenuOpen = false;
-  protected selectedProjectId = this.projects[0].id;
-  protected statusMessageKey = 'internetExplorer.status.ready';
+  protected readonly isProjectsMenuOpen = signal(false);
+  protected readonly selectedProjectId = signal(this.projects[0].id);
+  protected readonly statusMessageKey = signal('internetExplorer.status.ready');
 
-  protected get selectedProject(): WebProject {
-    return this.projects.find((p) => p.id === this.selectedProjectId) ?? this.projects[0];
-  }
+  private readonly selectedProjectIndex = computed(() =>
+    this.projects.findIndex((project) => project.id === this.selectedProjectId()),
+  );
 
-  private get selectedProjectIndex(): number {
-    return this.projects.findIndex((project) => project.id === this.selectedProjectId);
-  }
-
-  protected get canGoBack(): boolean {
-    return this.selectedProjectIndex > 0;
-  }
-
-  protected get canGoForward(): boolean {
-    return this.selectedProjectIndex >= 0 && this.selectedProjectIndex < this.projects.length - 1;
-  }
+  protected readonly selectedProject = computed(
+    () => this.projects[this.selectedProjectIndex()] ?? this.projects[0],
+  );
+  protected readonly canGoBack = computed(() => this.selectedProjectIndex() > 0);
+  protected readonly canGoForward = computed(
+    () =>
+      this.selectedProjectIndex() >= 0 && this.selectedProjectIndex() < this.projects.length - 1,
+  );
 
   protected toggleProjectsMenu(): void {
-    this.isProjectsMenuOpen = !this.isProjectsMenuOpen;
+    this.isProjectsMenuOpen.update((open) => !open);
   }
 
   protected closeProjectsMenu(): void {
-    this.isProjectsMenuOpen = false;
+    this.isProjectsMenuOpen.set(false);
   }
 
   protected selectProject(projectId: string): void {
-    this.selectedProjectId = projectId;
-    this.statusMessageKey = 'internetExplorer.status.projectSelected';
+    this.selectedProjectId.set(projectId);
+    this.statusMessageKey.set('internetExplorer.status.projectSelected');
     this.closeProjectsMenu();
   }
 
   protected goBack(): void {
-    if (!this.canGoBack) {
-      return;
-    }
-
-    this.selectedProjectId = this.projects[this.selectedProjectIndex - 1].id;
-    this.statusMessageKey = 'internetExplorer.status.projectSelected';
+    if (!this.canGoBack()) return;
+    this.selectProjectAt(this.selectedProjectIndex() - 1);
   }
 
   protected goForward(): void {
-    if (!this.canGoForward) {
-      return;
-    }
-
-    this.selectedProjectId = this.projects[this.selectedProjectIndex + 1].id;
-    this.statusMessageKey = 'internetExplorer.status.projectSelected';
+    if (!this.canGoForward()) return;
+    this.selectProjectAt(this.selectedProjectIndex() + 1);
   }
 
   protected refreshProject(): void {
-    this.statusMessageKey = 'internetExplorer.status.ready';
+    this.resetStatus();
   }
 
   protected goHome(): void {
-    this.selectedProjectId = this.projects[0].id;
-    this.statusMessageKey = 'internetExplorer.status.ready';
+    this.selectedProjectId.set(this.projects[0].id);
+    this.resetStatus();
   }
 
   protected showOpeningStatus(): void {
-    this.statusMessageKey = 'internetExplorer.status.opening';
+    this.statusMessageKey.set('internetExplorer.status.opening');
   }
 
   protected showOpenHint(): void {
-    this.statusMessageKey = 'internetExplorer.status.hoverOpen';
+    this.statusMessageKey.set('internetExplorer.status.hoverOpen');
   }
 
   protected showRepoHint(): void {
-    this.statusMessageKey = 'internetExplorer.status.hoverRepo';
+    this.statusMessageKey.set('internetExplorer.status.hoverRepo');
   }
 
   protected resetStatus(): void {
-    this.statusMessageKey = 'internetExplorer.status.ready';
+    this.statusMessageKey.set('internetExplorer.status.ready');
+  }
+
+  private selectProjectAt(index: number): void {
+    this.selectedProjectId.set(this.projects[index].id);
+    this.statusMessageKey.set('internetExplorer.status.projectSelected');
   }
 }

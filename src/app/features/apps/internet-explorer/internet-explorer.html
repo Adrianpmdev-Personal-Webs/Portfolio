@@ -1,12 +1,12 @@
 <div class="ie-app">
   <div class="ie-toolbar">
     <div class="ie-address-wrap">
-      <label>{{ 'internetExplorer.toolbar.address' | translate }}</label>
-      <input [value]="selectedProject.deployUrl" readonly />
+      <label for="ie-address">{{ 'internetExplorer.toolbar.address' | translate }}</label>
+      <input id="ie-address" [value]="selectedProject().deployUrl" readonly />
 
       <a
         class="ie-go-btn"
-        [href]="selectedProject.deployUrl"
+        [href]="selectedProject().deployUrl"
         target="_blank"
         rel="noopener noreferrer"
         (mouseenter)="showOpenHint()"
@@ -21,7 +21,7 @@
       <button
         type="button"
         class="ie-tool-btn ie-tool-btn--icon"
-        [disabled]="!canGoBack"
+        [disabled]="!canGoBack()"
         title="{{ 'internetExplorer.toolbar.back' | translate }}"
         (click)="goBack()"
       >
@@ -31,7 +31,7 @@
       <button
         type="button"
         class="ie-tool-btn ie-tool-btn--icon"
-        [disabled]="!canGoForward"
+        [disabled]="!canGoForward()"
         title="{{ 'internetExplorer.toolbar.forward' | translate }}"
         (click)="goForward()"
       >
@@ -60,7 +60,7 @@
         type="button"
         class="ie-menu-button"
         (click)="toggleProjectsMenu()"
-        [attr.aria-expanded]="isProjectsMenuOpen"
+        [attr.aria-expanded]="isProjectsMenuOpen()"
         [attr.aria-label]="'common.projects' | translate"
       >
         <span></span>
@@ -73,21 +73,21 @@
   <div class="ie-main">
     <div
       class="ie-menu-backdrop"
-      [class.ie-menu-backdrop--visible]="isProjectsMenuOpen"
+      [class.ie-menu-backdrop--visible]="isProjectsMenuOpen()"
+      aria-hidden="true"
+      tabindex="-1"
       (click)="closeProjectsMenu()"
+      (keydown.escape)="closeProjectsMenu()"
     ></div>
 
-    <aside
-      class="ie-sidebar"
-      [class.ie-sidebar--open]="isProjectsMenuOpen"
-    >
+    <aside class="ie-sidebar" [class.ie-sidebar--open]="isProjectsMenuOpen()">
       <h3>{{ 'common.projects' | translate }}</h3>
 
       @for (project of projects; track project.id) {
         <button
           type="button"
           class="ie-project-item"
-          [class.ie-project-item--active]="project.id === selectedProjectId"
+          [class.ie-project-item--active]="project.id === selectedProjectId()"
           (click)="selectProject(project.id)"
         >
           {{ project.titleKey | translate }}
@@ -98,18 +98,15 @@
     <section class="ie-content">
       <div class="ie-project-header">
         <div class="ie-project-title">
-          <h2>{{ selectedProject.titleKey | translate }}</h2>
+          <h2>{{ selectedProject().titleKey | translate }}</h2>
 
-          <span
-            class="ie-status"
-            [class.ie-status--wip]="selectedProject.status === 'wip'"
-          >
-            {{ selectedProject.status | projectStatusLabel | translate }}
+          <span class="ie-status" [class.ie-status--wip]="selectedProject().status === 'wip'">
+            {{ selectedProject().status | projectStatusLabel | translate }}
           </span>
         </div>
 
         <div class="ie-stack">
-          @for (tech of selectedProject.stack; track tech) {
+          @for (tech of selectedProject().stack; track $index) {
             <span class="ie-chip">{{ tech }}</span>
           }
         </div>
@@ -117,13 +114,13 @@
 
       <div class="ie-project-info">
         <p class="ie-summary">
-          {{ selectedProject.summaryKey | translate }}
+          {{ selectedProject().summaryKey | translate }}
         </p>
 
         <div class="ie-actions">
           <a
             class="ie-action ie-action--primary"
-            [href]="selectedProject.deployUrl"
+            [href]="selectedProject().deployUrl"
             target="_blank"
             rel="noopener noreferrer"
             (mouseenter)="showOpenHint()"
@@ -133,10 +130,10 @@
             {{ 'internetExplorer.actions.openSite' | translate }}
           </a>
 
-          @if (selectedProject.repoUrl) {
+          @if (selectedProject().repoUrl) {
             <a
               class="ie-action"
-              [href]="selectedProject.repoUrl"
+              [href]="selectedProject().repoUrl"
               target="_blank"
               rel="noopener noreferrer"
               (mouseenter)="showRepoHint()"
@@ -151,7 +148,7 @@
       <div class="ie-preview">
         <a
           class="ie-preview__link"
-          [href]="selectedProject.deployUrl"
+          [href]="selectedProject().deployUrl"
           target="_blank"
           rel="noopener noreferrer"
           (mouseenter)="showOpenHint()"
@@ -160,8 +157,8 @@
         >
           <img
             class="ie-preview__img"
-            [src]="selectedProject.previewSrc"
-            [alt]="selectedProject.titleKey | translate"
+            [src]="selectedProject().previewSrc"
+            [alt]="selectedProject().titleKey | translate"
             loading="lazy"
           />
         </a>
@@ -170,6 +167,6 @@
   </div>
 
   <footer class="ie-status-bar">
-    {{ statusMessageKey | translate }}
+    {{ statusMessageKey() | translate }}
   </footer>
 </div>
