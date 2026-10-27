@@ -7,13 +7,14 @@
  * @author adrianpmdev
  */
 
-import { Component, DOCUMENT, inject } from '@angular/core';
+import { Component, DestroyRef, ElementRef, Injector, afterNextRender, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { TranslatePipe } from '@ngx-translate/core';
 import gsap from 'gsap';
+import { Fullscreen } from '../../core/fullscreen/fullscreen';
+import { UserSession } from '../../core/session/user-session';
 import { AppDefinition } from '../apps/app-definition';
 import { APP_REGISTRY } from '../apps/app-registry';
-import { UserSession } from '../../core/session/user-session';
 import { DesktopIcon } from './desktop-icon/desktop-icon';
 import { Taskbar } from './taskbar/taskbar';
 import { WindowManager } from './window-manager';
@@ -28,9 +29,11 @@ import { XpWindow } from './xp-window/xp-window';
 export class Desktop {
   private readonly windowManager = inject(WindowManager);
   private readonly userSession = inject(UserSession);
+  private readonly fullscreen = inject(Fullscreen);
   private readonly router = inject(Router);
-  private readonly document = inject(DOCUMENT);
-  private readonly pendingOpenAnimations = new Set<string>();
+  private readonly injector = inject(Injector);
+  private readonly host: HTMLElement = inject(ElementRef).nativeElement;
+  private readonly animations = gsap.context(() => {}, this.host);
 
   protected readonly apps = APP_REGISTRY;
   protected readonly userName = this.userSession.getUserName();
@@ -38,20 +41,18 @@ export class Desktop {
 
   constructor() {
     this.apps.forEach((app) => app.loadComponent());
+    inject(DestroyRef).onDestroy(() => this.animations.kill());
   }
 
-  protected openApp(app: AppDefinition): void {
+  protected async openApp(app: AppDefinition): Promise<void> {
+    const component = await app.loadComponent();
     const existingWindow = this.windows().find((win) => win.id === app.id);
     const shouldAnimateIn = !existingWindow || existingWindow.state === 'minimized';
 
-    if (shouldAnimateIn) {
-      this.pendingOpenAnimations.add(app.id);
-    }
-
-    this.windowManager.openWindow(app);
+    this.windowManager.openWindow(app, component);
 
     if (shouldAnimateIn) {
-      this.animateWindowInWhenReady(app.id, existingWindow?.state === 'minimized');
+      this.animateWindowInAfterRender(app.id, existingWindow?.state === 'minimized');
     }
   }
 
@@ -60,49 +61,11 @@ export class Desktop {
   }
 
   protected minimizeWindow(id: string): void {
-    const element = this.getWindowElement(id);
-
-    if (!element) {
-      this.windowManager.minimizeWindow(id);
-      return;
-    }
-
-    gsap.killTweensOf(element);
-
-    gsap.to(element, {
-      duration: 0.22,
-      ease: 'power2.in',
-      scale: 0.92,
-      y: 24,
-      opacity: 0,
-      transformOrigin: 'center center',
-      onComplete: () => {
-        this.windowManager.minimizeWindow(id);
-      },
-    });
+    this.animateWindowOut(id, { duration: 0.22, scale: 0.92, y: 24 }, () => this.windowManager.minimizeWindow(id));
   }
 
   protected closeWindow(id: string): void {
-    const element = this.getWindowElement(id);
-
-    if (!element) {
-      this.windowManager.closeWindow(id);
-      return;
-    }
-
-    gsap.killTweensOf(element);
-
-    gsap.to(element, {
-      duration: 0.24,
-      ease: 'power2.in',
-      scale: 0.82,
-      y: 36,
-      opacity: 0,
-      transformOrigin: 'center center',
-      onComplete: () => {
-        this.windowManager.closeWindow(id);
-      },
-    });
+    this.animateWindowOut(id, { duration: 0.24, scale: 0.82, y: 36 }, () => this.windowManager.closeWindow(id));
   }
 
   protected toggleWindowFromTaskbar(id: string): void {
@@ -110,9 +73,8 @@ export class Desktop {
     if (!win) return;
 
     if (win.state === 'minimized') {
-      this.pendingOpenAnimations.add(id);
       this.windowManager.restoreWindow(id);
-      this.animateWindowInWhenReady(id, true);
+      this.animateWindowInAfterRender(id, true);
       return;
     }
 
@@ -131,54 +93,61 @@ export class Desktop {
 
   protected async turnOff(): Promise<void> {
     this.windowManager.reset();
-
-    if (this.document.fullscreenElement) {
-      try {
-        await this.document.exitFullscreen();
-      } catch {}
-    }
-
+    await this.fullscreen.exit();
     this.router.navigateByUrl('/');
   }
 
-  protected isPendingOpenAnimation(id: string): boolean {
-    return this.pendingOpenAnimations.has(id);
-  }
-
-  private animateWindowInWhenReady(id: string, isRestore = false, attempt = 0): void {
+  private animateWindowOut(
+    id: string,
+    motion: { duration: number; scale: number; y: number },
+    onComplete: () => void,
+  ): void {
     const element = this.getWindowElement(id);
 
     if (!element) {
-      if (attempt < 10) {
-        requestAnimationFrame(() => this.animateWindowInWhenReady(id, isRestore, attempt + 1));
-      } else {
-        this.pendingOpenAnimations.delete(id);
-      }
+      onComplete();
       return;
     }
 
-    gsap.killTweensOf(element);
+    this.animations.add(() => {
+      gsap.killTweensOf(element);
+      gsap.to(element, {
+        ...motion,
+        ease: 'power2.in',
+        opacity: 0,
+        transformOrigin: 'center center',
+        onComplete,
+      });
+    });
+  }
 
-    gsap.fromTo(
-      element,
-      {
-        autoAlpha: 0,
-        filter: isRestore ? 'blur(1px)' : 'blur(2px)',
+  private animateWindowInAfterRender(id: string, isRestore: boolean): void {
+    afterNextRender(
+      () => {
+        const element = this.getWindowElement(id);
+
+        if (!element) return;
+
+        this.animations.add(() => {
+          gsap.killTweensOf(element);
+          gsap.fromTo(
+            element,
+            { autoAlpha: 0, filter: isRestore ? 'blur(1px)' : 'blur(2px)' },
+            {
+              duration: 0.24,
+              ease: 'power2.out',
+              autoAlpha: 1,
+              filter: 'blur(0px)',
+              clearProps: 'opacity,visibility,filter',
+            },
+          );
+        });
       },
-      {
-        duration: 0.24,
-        ease: 'power2.out',
-        autoAlpha: 1,
-        filter: 'blur(0px)',
-        clearProps: 'opacity,visibility,filter',
-        onComplete: () => {
-          this.pendingOpenAnimations.delete(id);
-        },
-      },
+      { injector: this.injector },
     );
   }
 
   private getWindowElement(id: string): HTMLElement | null {
-    return this.document.querySelector<HTMLElement>(`[data-window-id="${id}"]`);
+    return this.host.querySelector<HTMLElement>(`[data-window-id="${id}"]`);
   }
 }

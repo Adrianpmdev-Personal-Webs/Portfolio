@@ -17,7 +17,7 @@ export const WEB_PROJECTS: readonly WebProject[] = [
     summaryKey: 'internetExplorer.projects.project1.summary',
     status: 'online',
     deployUrl: 'https://the-witcher-web.vercel.app/',
-    previewSrc: '/assets/images/webs/project1.png',
+    previewSrc: '/assets/images/webs/project1.webp',
     stack: ['HTML', 'CSS', 'JS'],
   },
   {
@@ -26,7 +26,7 @@ export const WEB_PROJECTS: readonly WebProject[] = [
     summaryKey: 'internetExplorer.projects.project2.summary',
     status: 'online',
     deployUrl: 'https://adrianpmdev-portfolio.vercel.app',
-    previewSrc: '/assets/images/webs/project2.png',
+    previewSrc: '/assets/images/webs/project2.webp',
     stack: ['Angular', 'TypeScript', 'SCSS'],
   },
   {
@@ -35,7 +35,7 @@ export const WEB_PROJECTS: readonly WebProject[] = [
     summaryKey: 'internetExplorer.projects.project3.summary',
     status: 'online',
     deployUrl: 'https://eventvsmerida.vercel.app',
-    previewSrc: '/assets/images/webs/project3.png',
+    previewSrc: '/assets/images/webs/project3.webp',
     stack: ['Angular', 'TypeScript', 'SCSS'],
   },
 ];

@@ -1,15 +1,17 @@
 /**
  * XpWindow
  *
- * XP window frame that lazy-loads its app component and emits minimize/close
- * clicks for the Desktop to handle.
+ * XP window frame that renders its already-loaded app component, provides it
+ * with the APP_WINDOW context and emits minimize/close clicks for the Desktop
+ * to handle.
  *
  * @author adrianpmdev
  */
 
 import { NgComponentOutlet } from '@angular/common';
-import { Component, OnInit, Type, input, output, signal } from '@angular/core';
+import { Component, Injector, computed, inject, input, output } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { APP_WINDOW, AppWindow } from '../../apps/app-window';
 import { DesktopWindow } from '../desktop-window';
 
 @Component({
@@ -23,17 +25,19 @@ import { DesktopWindow } from '../desktop-window';
     '[style.z-index]': 'desktopWindow().zIndex',
   },
 })
-export class XpWindow implements OnInit {
+export class XpWindow {
   readonly desktopWindow = input.required<DesktopWindow>();
 
   readonly minimizeClick = output<void>();
   readonly closeClick = output<void>();
 
-  protected readonly appComponent = signal<Type<unknown> | null>(null);
-
-  ngOnInit(): void {
-    this.desktopWindow()
-      .app.loadComponent()
-      .then((component) => this.appComponent.set(component));
-  }
+  protected readonly appInjector = Injector.create({
+    parent: inject(Injector),
+    providers: [
+      {
+        provide: APP_WINDOW,
+        useValue: { active: computed(() => this.desktopWindow().active) } satisfies AppWindow,
+      },
+    ],
+  });
 }

@@ -1,16 +1,15 @@
-<nav class="xp-taskbar" role="navigation" [attr.aria-label]="'XP taskbar'">
+<nav class="xp-taskbar" [attr.aria-label]="'common.taskbar' | translate">
   <button
     class="xp-start"
     mat-button
     type="button"
-    [matMenuTriggerFor]="startMenu"
+    [matMenuTriggerFor]="startMenu.menu()"
     [attr.aria-label]="'common.actions.start' | translate"
-    (menuOpened)="closeAllPrograms()"
   >
     <img
       class="xp-start__logo"
-      src="/assets/images/system/logo_xp.png"
-      alt="Start logo"
+      src="/assets/images/system/logo_xp.webp"
+      alt=""
     />
 
     <span class="xp-start__text">
@@ -44,7 +43,7 @@
       [matMenuTriggerFor]="langMenu"
       [attr.aria-label]="'common.actions.language' | translate"
     >
-      {{ currentLang }}
+      {{ currentLang() | uppercase }}
     </button>
   </div>
 
@@ -57,175 +56,14 @@
   </div>
 </nav>
 
-<mat-menu
-  #startMenu="matMenu"
-  xPosition="after"
-  yPosition="above"
-  class="xp-start-menu-panel"
->
-  <div class="xp-start-menu">
-    <div class="xp-start-menu__header">
-      <div class="xp-start-menu__avatar">
-        <img
-          src="/assets/images/system/avatar_xp.jpg"
-          [attr.alt]="'common.avatarAlt' | translate"
-        />
-      </div>
-
-      <div class="xp-start-menu__name">
-        {{ userName() || ('login.form.nameLabel' | translate) | titlecase }}
-      </div>
-    </div>
-
-    <div class="xp-start-menu__body">
-      <div
-        class="xp-start-menu__left"
-        [class.xp-start-menu__left--hidden-responsive]="isAllProgramsOpen"
-      >
-        @for (app of apps(); track app.id) {
-          <button
-            class="xp-start-item"
-            type="button"
-            (click)="appLaunch.emit(app)"
-          >
-            <img
-              [src]="app.iconSrc"
-              [attr.alt]="app.titleKey | translate"
-            />
-
-            <span>
-              {{ app.titleKey | translate }}
-            </span>
-          </button>
-        }
-
-        <div class="xp-start-menu__left-sep"></div>
-
-        <button
-          class="xp-start-all-programs"
-          type="button"
-          (click)="$event.stopPropagation(); openAllPrograms()"
-        >
-          <span>
-            {{ 'common.startMenu.allPrograms' | translate }}
-          </span>
-
-          <span
-            class="xp-start-all-programs__arrow"
-            aria-hidden="true"
-          ></span>
-        </button>
-      </div>
-
-      <div
-        class="xp-start-menu__right"
-        [class.xp-start-menu__right--visible-responsive]="isAllProgramsOpen"
-      >
-        <button
-          class="xp-right-back"
-          type="button"
-          (click)="$event.stopPropagation(); closeAllPrograms()"
-        >
-          <span
-            class="xp-right-back__arrow"
-            aria-hidden="true"
-          ></span>
-
-          <span>
-            {{ 'common.startMenu.back' | translate }}
-          </span>
-        </button>
-
-        <div class="xp-right-sep"></div>
-
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="launchAppById('my-pc')"
-        >
-          {{ 'common.startMenu.myComputer' | translate }}
-        </button>
-
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="launchAppById('photo-viewer')"
-        >
-          {{ 'common.startMenu.myPictures' | translate }}
-        </button>
-
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="launchAppById('internet-explorer')"
-        >
-          {{ 'common.startMenu.internet' | translate }}
-        </button>
-
-        <div class="xp-right-sep"></div>
-
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="openUrl('mailto:adrianperez936@gmail.com')"
-        >
-          {{ 'common.startMenu.helpSupport' | translate }}
-        </button>
-
-        <button
-          class="xp-right-item"
-          type="button"
-          (click)="openUrl('https://www.linkedin.com/in/adrián-pérez-morales-493784410/')"
-        >
-          {{ 'common.startMenu.search' | translate }}
-        </button>
-
-        <button
-          class="xp-right-item"
-          type="button"
-        >
-          {{ 'common.startMenu.run' | translate }}
-        </button>
-      </div>
-    </div>
-
-    <div class="xp-start-menu__footer">
-      <button
-        class="xp-power-btn xp-power-btn--logout"
-        type="button"
-        (click)="logout.emit()"
-      >
-        <span
-          class="xp-power-btn__icon-box"
-          aria-hidden="true"
-        >
-          <span class="xp-power-btn__icon-text xp-power-btn__logout-icon"></span>
-        </span>
-
-        <span class="xp-power-btn__label">
-          {{ 'common.actions.logout' | translate }}
-        </span>
-      </button>
-
-      <button
-        class="xp-power-btn xp-power-btn--off"
-        type="button"
-        (click)="turnOff.emit()"
-      >
-        <span
-          class="xp-power-btn__icon-box"
-          aria-hidden="true"
-        >
-          <span class="xp-power-btn__icon-text xp-power-btn__power-icon"></span>
-        </span>
-
-        <span class="xp-power-btn__label">
-          {{ 'common.actions.turnOffComputer' | translate }}
-        </span>
-      </button>
-    </div>
-  </div>
-</mat-menu>
+<app-start-menu
+  #startMenu
+  [apps]="apps()"
+  [userName]="userName()"
+  (appLaunch)="appLaunch.emit($event)"
+  (logout)="logout.emit()"
+  (turnOff)="turnOff.emit()"
+/>
 
 <mat-menu
   #langMenu="matMenu"
@@ -233,51 +71,21 @@
   yPosition="above"
   class="xp-lang-menu-panel"
 >
-  <button
-    mat-menu-item
-    type="button"
-    (click)="setLang('es')"
-  >
-    <img
-      class="xp-flag"
-      src="/assets/images/flags/es.svg"
-      alt="Español"
-    />
+  @for (lang of languages; track lang) {
+    <button
+      mat-menu-item
+      type="button"
+      (click)="setLang(lang)"
+    >
+      <img
+        class="xp-flag"
+        [src]="'/assets/images/flags/' + lang + '.svg'"
+        alt=""
+      />
 
-    <span>
-      {{ 'common.languages.es' | translate }}
-    </span>
-  </button>
-
-  <button
-    mat-menu-item
-    type="button"
-    (click)="setLang('en')"
-  >
-    <img
-      class="xp-flag"
-      src="/assets/images/flags/en.svg"
-      alt="English"
-    />
-
-    <span>
-      {{ 'common.languages.en' | translate }}
-    </span>
-  </button>
-
-  <button
-    mat-menu-item
-    type="button"
-    (click)="setLang('fr')"
-  >
-    <img
-      class="xp-flag"
-      src="/assets/images/flags/fr.svg"
-      alt="Français"
-    />
-
-    <span>
-      {{ 'common.languages.fr' | translate }}
-    </span>
-  </button>
+      <span>
+        {{ 'common.languages.' + lang | translate }}
+      </span>
+    </button>
+  }
 </mat-menu>

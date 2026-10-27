@@ -9,7 +9,7 @@
         type="button"
         class="pv-btn"
         (click)="prev()"
-        aria-label="Previous"
+        [attr.aria-label]="'photoViewer.actions.previous' | translate"
       >
         ◀
       </button>
@@ -18,7 +18,7 @@
         type="button"
         class="pv-btn"
         (click)="next()"
-        aria-label="Next"
+        [attr.aria-label]="'photoViewer.actions.next' | translate"
       >
         ▶
       </button>
@@ -27,7 +27,7 @@
         type="button"
         class="pv-btn"
         (click)="zoomOut()"
-        aria-label="Zoom out"
+        [attr.aria-label]="'photoViewer.actions.zoomOut' | translate"
       >
         −
       </button>
@@ -36,7 +36,7 @@
         type="button"
         class="pv-btn"
         (click)="zoomIn()"
-        aria-label="Zoom in"
+        [attr.aria-label]="'photoViewer.actions.zoomIn' | translate"
       >
         +
       </button>

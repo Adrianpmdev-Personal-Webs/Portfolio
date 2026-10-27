@@ -4,7 +4,7 @@
     type="button"
     (click)="toggleMenu()"
     [attr.aria-expanded]="isMenuOpen"
-    aria-label="Abrir menú"
+    [attr.aria-label]="'common.actions.openMenu' | translate"
   >
     <span></span>
     <span></span>
@@ -35,7 +35,7 @@
       <h3>{{ 'myPc.links.title' | translate }}</h3>
 
       <a
-        href="https://www.linkedin.com/in/adrián-pérez-morales-493784410"
+        [href]="profile.linkedinUrl"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logLinkedinClick()"
@@ -43,12 +43,12 @@
         {{ 'myPc.links.linkedin' | translate }}
       </a>
 
-      <a href="mailto:adrianperez936@gmail.com">
+      <a [href]="'mailto:' + profile.email">
         {{ 'myPc.links.contact' | translate }}
       </a>
 
       <a
-        href="/assets/docs/Adrian_Perez.pdf"
+        [href]="profile.cvUrl"
         target="_blank"
         rel="noopener noreferrer"
         (click)="logCvDownload()"
@@ -61,12 +61,12 @@
   <main class="my-pc__content">
     <header class="my-pc__header">
       <img
-        src="/assets/images/system/avatar_xp.jpg"
+        src="/assets/images/system/avatar_xp.webp"
         [alt]="'common.avatarAlt' | translate"
       />
 
       <div class="my-pc__header-info">
-        <h2>Adri&aacute;n P&eacute;rez Morales</h2>
+        <h2>{{ profile.fullName }}</h2>
         <p>{{ 'myPc.profile.roleValue' | translate }}</p>
       </div>
     </header>
@@ -91,7 +91,7 @@
             <p>
               <span>📧</span>
               <strong>{{ 'myPc.profile.emailLabel' | translate }}:</strong>
-              adrianperez936&#64;gmail.com
+              {{ profile.email }}
             </p>
 
             <p>
@@ -103,7 +103,7 @@
             <p>
               <span>📞</span>
               <strong>{{ 'myPc.profile.phoneLabel' | translate }}:</strong>
-              +34 652 45 87 51
+              {{ profile.phone }}
             </p>
 
             <p>
@@ -141,7 +141,7 @@
               <img
                 class="xp-flag"
                 src="/assets/images/flags/es.svg"
-                alt="Español"
+                alt=""
               />
               <p>{{ 'myPc.languages.spanish' | translate }}</p>
             </div>
@@ -150,7 +150,7 @@
               <img
                 class="xp-flag"
                 src="/assets/images/flags/en.svg"
-                alt="Inglés"
+                alt=""
               />
               <p>{{ 'myPc.languages.english' | translate }}</p>
             </div>

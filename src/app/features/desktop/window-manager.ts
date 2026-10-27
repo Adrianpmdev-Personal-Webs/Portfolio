@@ -7,7 +7,7 @@
  * @author adrianpmdev
  */
 
-import { Injectable, signal } from '@angular/core';
+import { Injectable, Type, signal } from '@angular/core';
 import { AppDefinition } from '../apps/app-definition';
 import { DesktopWindow } from './desktop-window';
 
@@ -19,7 +19,7 @@ export class WindowManager {
   private readonly windowsState = signal<DesktopWindow[]>([]);
   readonly windows = this.windowsState.asReadonly();
 
-  openWindow(app: AppDefinition): void {
+  openWindow(app: AppDefinition, component: Type<unknown>): void {
     const existing = this.windows().find((w) => w.id === app.id);
 
     if (existing) {
@@ -32,19 +32,19 @@ export class WindowManager {
     const next: DesktopWindow = {
       id: app.id,
       app,
+      component,
       state: 'open',
       active: true,
       zIndex: this.zCounter,
     };
 
-    const deactivated = this.windows().map((w) => ({ ...w, active: false }));
-    this.windowsState.set([...deactivated, next]);
+    this.windowsState.update((windows) => [...windows.map((w) => ({ ...w, active: false })), next]);
   }
 
   focusWindow(id: string): void {
     this.zCounter += 1;
-    this.windowsState.set(
-      this.windows().map((w) => {
+    this.windowsState.update((windows) =>
+      windows.map((w) => {
         if (w.id === id && w.state === 'open') {
           return { ...w, active: true, zIndex: this.zCounter };
         }
@@ -54,8 +54,8 @@ export class WindowManager {
   }
 
   minimizeWindow(id: string): void {
-    this.windowsState.set(
-      this.windows().map((w) => {
+    this.windowsState.update((windows) =>
+      windows.map((w) => {
         if (w.id === id) {
           return { ...w, state: 'minimized', active: false };
         }
@@ -68,8 +68,8 @@ export class WindowManager {
 
   restoreWindow(id: string): void {
     this.zCounter += 1;
-    this.windowsState.set(
-      this.windows().map((w) => {
+    this.windowsState.update((windows) =>
+      windows.map((w) => {
         if (w.id === id) {
           return { ...w, state: 'open', active: true, zIndex: this.zCounter };
         }
@@ -79,7 +79,7 @@ export class WindowManager {
   }
 
   closeWindow(id: string): void {
-    this.windowsState.set(this.windows().filter((w) => w.id !== id));
+    this.windowsState.update((windows) => windows.filter((w) => w.id !== id));
     this.activateTopOpenWindow();
   }
 

@@ -10,6 +10,7 @@
 import { Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { AccessLogger } from '../../../core/analytics/access-logger';
+import { PROFILE } from '../../../shared/profile/profile-data';
 import { SKILLS } from './skills-data';
 
 @Component({
@@ -21,6 +22,7 @@ import { SKILLS } from './skills-data';
 export class MyPc {
   private readonly accessLogger = inject(AccessLogger);
 
+  protected readonly profile = PROFILE;
   protected readonly skills = SKILLS;
   protected isMenuOpen = false;
 

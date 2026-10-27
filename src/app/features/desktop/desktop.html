@@ -1,4 +1,4 @@
-<section class="desktop-screen" role="main" aria-label="Desktop">
+<section class="desktop-screen" role="main" [attr.aria-label]="'common.desktop' | translate">
   <div class="desktop-icons">
     @for (app of apps; track app.id) {
       <app-desktop-icon
@@ -14,7 +14,6 @@
       @if (win.state === 'open') {
         <app-xp-window
           [desktopWindow]="win"
-          [class.xp-window--opening]="isPendingOpenAnimation(win.id)"
           (mousedown)="focusWindow(win.id)"
           (minimizeClick)="minimizeWindow(win.id)"
           (closeClick)="closeWindow(win.id)"

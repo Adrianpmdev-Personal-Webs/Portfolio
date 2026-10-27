@@ -7,9 +7,10 @@
  * @author adrianpmdev
  */
 
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
 import { ProjectStatusLabelPipe } from '../../../shared/project-status/project-status-label-pipe';
+import { APP_WINDOW } from '../app-window';
 import { MobileProject } from './mobile-project';
 import { MobileShot } from './mobile-shot';
 import { MOBILE_PROJECTS } from './mobile-projects-data';
@@ -24,6 +25,8 @@ import { MOBILE_PROJECTS } from './mobile-projects-data';
   },
 })
 export class PhotoViewer {
+  private readonly appWindow = inject(APP_WINDOW, { optional: true });
+
   protected readonly projects = MOBILE_PROJECTS;
 
   protected isProjectsMenuOpen = false;
@@ -90,6 +93,8 @@ export class PhotoViewer {
   }
 
   protected handleKeydown(event: KeyboardEvent): void {
+    if (this.appWindow && !this.appWindow.active()) return;
+
     if (event.key === 'ArrowLeft') {
       this.prev();
     }

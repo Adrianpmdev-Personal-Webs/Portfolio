@@ -76,10 +76,13 @@ src/app/
 │
 ├── core/                             # App-wide singletons, no UI
 │   ├── analytics/                    # Event logging
-│   ├── i18n/                         # Language settings
+│   ├── device/                       # Device category and platform detection
+│   ├── fullscreen/                   # Browser fullscreen
+│   ├── i18n/                         # Supported languages and language settings
 │   └── session/                      # User session
 │
 ├── shared/                           # Pieces used by several features
+│   ├── profile/                      # Author contact details (single source)
 │   └── project-status/               # Project status model + label pipe
 │
 └── features/
@@ -92,12 +95,14 @@ src/app/
     │   ├── window-manager.ts         # Window state (open, minimized, focus, z-order)
     │   ├── desktop-window.ts
     │   ├── desktop-icon/
-    │   ├── taskbar/                  # Start menu, window tabs, language, clock
+    │   ├── start-menu/               # XP Start menu
+    │   ├── taskbar/                  # Start button, window tabs, language, clock
     │   └── xp-window/                # XP window frame that lazy-loads each app
     │
     └── apps/                         # Desktop applications
         ├── app-definition.ts         # Contract every app implements
         ├── app-registry.ts           # List of installed apps
+        ├── app-window.ts             # Window context provided to each app
         ├── my-pc/
         │   ├── my-pc-manifest.ts
         │   └── skills-data.ts

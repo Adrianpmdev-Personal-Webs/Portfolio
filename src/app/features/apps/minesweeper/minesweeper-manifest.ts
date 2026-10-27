@@ -11,6 +11,6 @@ import { AppDefinition } from '../app-definition';
 export const MINESWEEPER_APP: AppDefinition = {
   id: 'minesweeper',
   titleKey: 'minesweeper.title',
-  iconSrc: '/assets/images/system/apps/minesweeper.png',
+  iconSrc: '/assets/images/system/apps/minesweeper.webp',
   loadComponent: () => import('./minesweeper').then((m) => m.Minesweeper),
 };

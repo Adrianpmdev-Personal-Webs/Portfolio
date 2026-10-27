@@ -1,5 +1,4 @@
 <section
-  #screen
   class="xp-saver"
   matRipple
   [matRippleColor]="'rgba(255,255,255,0.24)'"
@@ -10,10 +9,11 @@
   <div class="boot-content">
     <img
       class="boot-logo"
-      src="assets/images/system/logo_xp.png"
+      ngSrc="/assets/images/system/logo_xp.webp"
       [attr.alt]="'common.logoAlt' | translate"
       width="220"
-      height="220"
+      height="207"
+      priority
     />
 
     <h1 class="boot-title">{{ 'app.name' | translate }}</h1>

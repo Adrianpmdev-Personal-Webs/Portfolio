@@ -8,7 +8,5 @@
 </header>
 
 <div class="xp-window__body">
-  @if (appComponent(); as component) {
-    <ng-container *ngComponentOutlet="component" />
-  }
+  <ng-container *ngComponentOutlet="desktopWindow().component; injector: appInjector" />
 </div>

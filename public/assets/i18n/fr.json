@@ -4,9 +4,12 @@
   },
   
   "common": {
+    "desktop": "Bureau",
+    "taskbar": "Barre des tâches",
     "logoAlt": "Logo du portfolio",
     "avatarAlt": "Avatar du profil",
     "actions": {
+      "openMenu": "Ouvrir le menu",
       "clickToStart": "cliquez pour commencer",
       "start": "Démarrer",
       "help": "Aide",
@@ -55,7 +58,6 @@
       "submit": "Se connecter"
     },
     "welcomeMessage": "Bienvenue, {{name}}",
-    "footerLeft": "Éteindre l'ordinateur",
     "footerRight": "Après la connexion, vous pourrez accéder au bureau"
   },
 
@@ -141,6 +143,12 @@
   },
 
   "photoViewer": {
+    "actions": {
+      "previous": "Précédente",
+      "next": "Suivante",
+      "zoomIn": "Zoom avant",
+      "zoomOut": "Zoom arrière"
+    },
     "title": "Applications mobiles",
     "projects": {
       "spotify": "Application Android inspirée de Spotify avec inscription, connexion, chansons, playlists et profil. Intègre Firebase, Supabase Storage et l'API Deezer. Réalisée dans le cadre d'un projet éducatif.",

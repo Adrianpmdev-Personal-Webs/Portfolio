@@ -6,7 +6,7 @@
     <div class="login-shell__left">
       <img
         class="xp-mark"
-        src="assets/images/system/logo_xp.png"
+        src="assets/images/system/logo_xp.webp"
         [attr.alt]="'common.logoAlt' | translate"
       />
       <p class="brand-line">{{ "app.name" | translate }}</p>
@@ -21,7 +21,7 @@
           <div class="xp-user-row">
             <img
               class="xp-avatar"
-              src="assets/images/system/avatar_xp.jpg"
+              src="assets/images/system/avatar_xp.webp"
               [attr.alt]="'common.avatarAlt' | translate"
             />
 
@@ -55,7 +55,7 @@
 
                 <a
                   class="xp-help-btn"
-                  href="https://www.linkedin.com/in/adrián-pérez-morales-493784410"
+                  [href]="profile.linkedinUrl"
                   target="_blank"
                   rel="noopener noreferrer"
                   [attr.aria-label]="'common.actions.help' | translate"
@@ -95,7 +95,7 @@
         <div class="welcome-shell">
           <img
             class="xp-avatar"
-            src="assets/images/system/avatar_xp.jpg"
+            src="assets/images/system/avatar_xp.webp"
             [attr.alt]="'common.avatarAlt' | translate"
           />
 

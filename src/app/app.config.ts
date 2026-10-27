@@ -13,6 +13,7 @@ import { provideRouter, withViewTransitions } from '@angular/router';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { routes } from './app.routes';
+import { DEFAULT_LANGUAGE } from './core/i18n/language';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -20,7 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes, withViewTransitions()),
     provideHttpClient(),
     provideTranslateService({
-      fallbackLang: 'es',
+      fallbackLang: DEFAULT_LANGUAGE,
       loader: provideTranslateHttpLoader({
         prefix: './assets/i18n/',
         suffix: '.json',
