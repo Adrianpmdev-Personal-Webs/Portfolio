@@ -1,26 +1,28 @@
-import { Routes } from '@angular/router';
-import { desktopGuard } from './core/guards/desktop.guard';
-
 /**
- * Rutas de la aplicación: boot → login → escritorio (protegido por
- * {@link desktopGuard}), con redirección a la pantalla de arranque para
- * cualquier ruta no reconocida.
+ * routes
+ *
+ * Application routes: boot → login → desktop (protected by desktopGuard).
+ * Unknown paths redirect to the boot screen.
  *
  * @author adrianpmdev
  */
+
+import { Routes } from '@angular/router';
+import { desktopGuard } from './features/desktop/desktop-guard';
+
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./pages/boot-screen/boot-screen.component').then((m) => m.BootScreenComponent),
+    loadComponent: () => import('./features/boot/boot').then((m) => m.Boot),
   },
   {
     path: 'login',
-    loadComponent: () => import('./pages/login/login.component').then((m) => m.LoginComponent),
+    loadComponent: () => import('./features/login/login').then((m) => m.Login),
   },
   {
     path: 'desktop',
     canActivate: [desktopGuard],
-    loadComponent: () => import('./pages/desktop/desktop.component').then(m => m.DesktopComponent),
+    loadComponent: () => import('./features/desktop/desktop').then((m) => m.Desktop),
   },
   {
     path: '**',

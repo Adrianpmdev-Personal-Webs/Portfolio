@@ -1,0 +1,500 @@
+:host {
+  display: block;
+  height: 100%;
+  min-height: 0;
+}
+
+.pv-app {
+  height: 100%;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 34px minmax(0, 1fr);
+  background: #f0f4fb;
+  color: #17325e;
+  font-family: Tahoma, Verdana, sans-serif;
+  overflow: hidden;
+}
+
+.pv-toolbar {
+  position: relative;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 0 10px;
+  background: linear-gradient(180deg, #f8fafc 0%, #e9eef7 100%);
+  border-bottom: 1px solid #b7c6de;
+}
+
+.pv-toolbar__title {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.pv-toolbar__title strong {
+  font-size: 13px;
+}
+
+.pv-toolbar__title span {
+  font-size: 11px;
+  color: #5b6f91;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pv-toolbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.pv-btn {
+  min-width: 32px;
+  height: 22px;
+  border: 1px solid #8ea6c8;
+  background: linear-gradient(180deg, #ffffff 0%, #dce8f7 100%);
+  color: #17325e;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.pv-menu-btn {
+  width: 30px;
+  height: 30px;
+  min-width: 30px;
+  padding: 0;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border: 1px solid #8ea6c8;
+  border-radius: 3px;
+  background: linear-gradient(180deg, #ffffff 0%, #dce8f7 100%);
+  cursor: pointer;
+}
+
+.pv-menu-btn span {
+  display: block;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: #214f9d;
+}
+
+.pv-layout {
+  position: relative;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 236px minmax(0, 1fr) 124px;
+  overflow: hidden;
+}
+
+.pv-projects {
+  min-height: 0;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  border-right: 1px solid #b7c6de;
+  background: linear-gradient(180deg, #edf4ff 0%, #d9e8fb 100%);
+  overflow: hidden;
+}
+
+.pv-projects__top {
+  min-height: 0;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #b7c6de;
+}
+
+.pv-projects__top h3 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #214f9d;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.pv-projects__bottom {
+  min-height: 0;
+  padding: 10px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.pv-projects__bottom h4 {
+  margin: 0 0 8px;
+  font-size: 12px;
+  color: #214f9d;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  flex-shrink: 0;
+}
+
+.pv-project-description {
+  margin: 0;
+  font-size: 11px;
+  color: #17325e;
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+.pv-project-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-height: 0;
+  flex: 1;
+}
+
+.pv-project-item {
+  position: relative;
+  width: 100%;
+  border: 1px solid #9eb4d2;
+  background: #f8fbff;
+  min-height: 52px;
+  padding: 6px 8px;
+  text-align: left;
+  color: #17325e;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex-shrink: 0;
+  transition: all 120ms ease;
+}
+
+.pv-project-item:hover {
+  background: #e9f0ff;
+  border-color: #8fa9d1;
+}
+
+.pv-project-item--active {
+  background: #dfefff;
+  border-color: #7fa3d4;
+  font-weight: 700;
+}
+
+.pv-project-item__name {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.pv-project-item__meta {
+  display: block;
+  font-size: 10px;
+  color: #5b6f91;
+}
+
+.pv-project-item__status {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  font-size: 9px;
+  padding: 2px 4px;
+  border-radius: 2px;
+  background: rgba(23, 50, 94, 0.1);
+  color: #17325e;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  border: 1px solid rgba(23, 50, 94, 0.2);
+}
+
+.pv-project-item__status--wip {
+  background: rgba(229, 131, 68, 0.15);
+  color: #c85a00;
+  border-color: rgba(229, 131, 68, 0.3);
+}
+
+.pv-viewer {
+  min-width: 0;
+  min-height: 0;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 32px;
+  border-right: 1px solid #b7c6de;
+  background: #f7fbff;
+}
+
+.pv-viewer__frame {
+  min-height: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10px;
+  overflow: auto;
+  background: radial-gradient(
+    circle at center,
+    #ffffff 0%,
+    #eef4fb 70%,
+    #e4edf9 100%
+  );
+}
+
+.pv-viewer__image {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border: 1px solid #a9bdd7;
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(28, 54, 92, 0.18);
+  transform-origin: top center;
+  transition: transform 100ms ease;
+}
+
+.pv-viewer__caption {
+  min-width: 0;
+  border-top: 1px solid #c0cde0;
+  background: rgba(236, 233, 216, 0.94);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+  color: #28426d;
+  padding: 0 12px;
+  overflow: hidden;
+}
+
+.pv-viewer__caption strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.pv-viewer__meta {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #4d648a;
+}
+
+.pv-thumbs {
+  min-height: 0;
+  padding: 10px 8px;
+  background: #e9eef7;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.pv-thumb {
+  width: 100%;
+  height: 74px;
+  padding: 3px;
+  border: 1px solid #96abd0;
+  background: #ffffff;
+  cursor: pointer;
+  transition: all 120ms ease;
+}
+
+.pv-thumb:hover {
+  border-color: #7a93be;
+  box-shadow: inset 0 0 0 1px rgba(122, 147, 190, 0.3);
+}
+
+.pv-thumb--active {
+  outline: 2px solid #5d86c8;
+}
+
+.pv-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pv-menu-backdrop {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .pv-layout {
+    grid-template-columns: 220px minmax(0, 1fr);
+  }
+
+  .pv-thumbs {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .pv-menu-btn {
+    display: flex;
+  }
+
+  .pv-layout {
+    display: block;
+    overflow: hidden;
+  }
+
+  .pv-menu-backdrop {
+    position: absolute;
+    inset: 0;
+    z-index: 15;
+    display: block;
+    background: rgba(8, 24, 53, 0.28);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+      opacity 0.2s ease,
+      visibility 0.2s ease;
+  }
+
+  .pv-menu-backdrop--visible {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  .pv-projects {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 20;
+    width: min(300px, 82vw);
+    height: 100%;
+    box-sizing: border-box;
+    border-right: 1px solid #b7c6de;
+    border-bottom: 0;
+    box-shadow: 8px 0 22px rgba(19, 49, 91, 0.18);
+    transform: translateX(-100%);
+    transition: transform 0.22s ease;
+    overflow: hidden;
+  }
+
+  .pv-projects--open {
+    transform: translateX(0);
+  }
+
+  .pv-viewer {
+    width: 100%;
+    height: 100%;
+    border-right: 0;
+  }
+
+  .pv-viewer__frame {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 760px) {
+  .pv-layout {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+
+  .pv-viewer {
+    border-right: 0;
+  }
+
+  .pv-projects {
+    width: min(320px, 86vw);
+  }
+
+  .pv-projects__top {
+    max-height: none;
+  }
+
+  .pv-projects__bottom {
+    max-height: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .pv-app {
+    grid-template-rows: 40px minmax(0, 1fr);
+  }
+
+  .pv-toolbar {
+    padding: 0 8px;
+    gap: 8px;
+  }
+
+  .pv-toolbar__title {
+    min-width: 0;
+  }
+
+  .pv-toolbar__title span {
+    max-width: 48vw;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+  }
+
+  .pv-toolbar__actions {
+    gap: 5px;
+  }
+
+  .pv-btn {
+    min-width: 34px;
+    height: 30px;
+  }
+
+  .pv-menu-btn {
+    width: 30px;
+    height: 30px;
+    min-width: 30px;
+  }
+
+  .pv-menu-btn span {
+    width: 16px;
+  }
+
+  .pv-projects {
+    width: 100%;
+  }
+
+  .pv-viewer {
+    grid-template-rows: minmax(0, 1fr) 32px;
+  }
+
+  .pv-viewer__caption {
+    gap: 8px;
+    padding: 0 8px;
+  }
+
+  .pv-viewer__caption strong {
+    font-size: 11px;
+  }
+
+  .pv-viewer__meta {
+    font-size: 10px;
+    letter-spacing: -0.1px;
+  }
+}
+
+@media (max-width: 380px) {
+  .pv-viewer__caption {
+    gap: 5px;
+    padding: 0 6px;
+  }
+
+  .pv-viewer__caption strong {
+    font-size: 10px;
+  }
+
+  .pv-viewer__meta {
+    font-size: 9px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pv-projects,
+  .pv-menu-backdrop {
+    transition: none;
+  }
+}

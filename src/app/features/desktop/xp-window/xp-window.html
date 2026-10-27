@@ -1,0 +1,14 @@
+<header class="xp-window__header">
+  <span class="xp-window__title">{{ desktopWindow().app.titleKey | translate }}</span>
+
+  <div class="xp-window__actions">
+    <button type="button" class="xp-win-btn" (click)="minimizeClick.emit()">_</button>
+    <button type="button" class="xp-win-btn xp-win-btn--close" (click)="closeClick.emit()">x</button>
+  </div>
+</header>
+
+<div class="xp-window__body">
+  @if (appComponent(); as component) {
+    <ng-container *ngComponentOutlet="component" />
+  }
+</div>

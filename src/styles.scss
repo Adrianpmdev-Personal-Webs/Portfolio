@@ -26,17 +26,9 @@ body {
 body {
   margin: 0;
   font-family: var(--font-ui);
-  /* Evita el "bounce"/scroll elástico de iOS fuera del área de la app. */
   overscroll-behavior: none;
 }
 
-/*
- * El simulador de XP depende de gestos táctiles precisos (arrastrar,
- * pulsación larga en el Buscaminas, tabs de la taskbar). Estas reglas
- * quitan el resaltado azul al tocar y el retraso de 300ms del navegador
- * antes de disparar "click", para que se sienta a la misma velocidad
- * que una app nativa.
- */
 * {
   -webkit-tap-highlight-color: transparent;
 }
@@ -63,11 +55,11 @@ h4 {
 }
 
 html, body, *:not(input):not(textarea):not(select):not(button):not(a):not([contenteditable="true"]) {
-  cursor: url("assets/images/system/xp-arrow.cur"), auto;
+  cursor: url("/assets/images/system/xp-arrow.cur"), auto;
 }
 
 input, textarea, select, [contenteditable="true"] {
-  cursor: url("assets/images/system/xp-ibeam.cur"), text !important;
+  cursor: url("/assets/images/system/xp-ibeam.cur"), text !important;
 }
 
 button, button *,
@@ -77,14 +69,9 @@ a[href], a[href] *,
 input[type="button"], input[type="submit"],
 .mat-button, .mat-button *,
 .mat-icon-button, .mat-icon-button * {
-  cursor: url("assets/images/system/xp-hand.cur"), pointer !important;
+  cursor: url("/assets/images/system/xp-hand.cur"), pointer !important;
 }
 
-/**
- * Fundido cruzado entre rutas (boot -> login -> escritorio), gestionado
- * de forma nativa por el Router mediante la View Transitions API
- * (ver `withViewTransitions()` en app.config.ts).
- */
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation-duration: 260ms;

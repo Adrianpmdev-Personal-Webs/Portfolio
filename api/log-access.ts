@@ -1,8 +1,13 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-
 /**
- * Proxy serverless para registrar eventos del portfolio.
+ * log-access
+ *
+ * Vercel serverless function that receives portfolio events, checks origin and
+ * rate limit, and forwards them to Discord webhooks.
+ *
+ * @author adrianpmdev
  */
+
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const ALLOWED_ORIGINS = ['https://adrianpmdev-portfolio.vercel.app'];
 

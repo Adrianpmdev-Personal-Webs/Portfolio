@@ -67,15 +67,53 @@ The project combines a retro interface (**boot screen, login, desktop, windows a
 
 ## 🏗️ Project Approach
 
-- 🧱 Architecture based on **standalone components**.
-- 📂 Clear separation of responsibilities:
+- 🧱 Architecture based on **standalone components**, following the official [Angular style guide](https://angular.dev/style-guide) (feature folders, no type suffixes).
+- 📂 Code organized in `core`, `shared` and `features`:
 
-| Folder | Content |
-|--------|---------|
-| `pages/` | Real routes: boot, login and desktop |
-| `apps/` | Desktop applications: My Computer, Internet Explorer, Photo Viewer, Minesweeper |
-| `components/` | Reusable components |
-| `core/` | Services, models, guards, interceptors and pipes |
+```
+src/app/
+├── app.ts · app.config.ts · app.routes.ts
+│
+├── core/                             # App-wide singletons, no UI
+│   ├── analytics/                    # Event logging
+│   ├── i18n/                         # Language settings
+│   └── session/                      # User session
+│
+├── shared/                           # Pieces used by several features
+│   └── project-status/               # Project status model + label pipe
+│
+└── features/
+    ├── boot/                         # Boot screen route
+    ├── login/                        # Login route
+    │
+    ├── desktop/                      # Desktop route
+    │   ├── desktop.ts
+    │   ├── desktop-guard.ts          # Protects the desktop route
+    │   ├── window-manager.ts         # Window state (open, minimized, focus, z-order)
+    │   ├── desktop-window.ts
+    │   ├── desktop-icon/
+    │   ├── taskbar/                  # Start menu, window tabs, language, clock
+    │   └── xp-window/                # XP window frame that lazy-loads each app
+    │
+    └── apps/                         # Desktop applications
+        ├── app-definition.ts         # Contract every app implements
+        ├── app-registry.ts           # List of installed apps
+        ├── my-pc/
+        │   ├── my-pc-manifest.ts
+        │   └── skills-data.ts
+        ├── internet-explorer/
+        │   ├── internet-explorer-manifest.ts
+        │   └── web-projects-data.ts       # Web projects
+        ├── photo-viewer/
+        │   ├── photo-viewer-manifest.ts
+        │   └── mobile-projects-data.ts    # Mobile projects
+        └── minesweeper/
+            ├── minesweeper-manifest.ts
+            └── minesweeper-engine.ts      # Game logic, UI-independent
+```
+
+- 🧩 **Pluggable apps**: each app lives in its own folder with a manifest (`<app>-manifest.ts`). Adding one means creating its folder and listing its manifest in `features/apps/app-registry.ts`; the desktop, Start menu and taskbar pick it up automatically and its code is lazy-loaded.
+- 🗂️ **Data-driven projects**: web and mobile projects live in `features/apps/internet-explorer/web-projects-data.ts` and `features/apps/photo-viewer/mobile-projects-data.ts`, so adding a project doesn't require touching any component.
 
 - 🔐 Client-side user session management to control the boot / login / desktop flow.
 - 🎭 Interface focused on the visual experience and the narrative of the portfolio.

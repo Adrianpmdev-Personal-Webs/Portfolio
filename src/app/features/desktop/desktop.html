@@ -1,0 +1,35 @@
+<section class="desktop-screen" role="main" aria-label="Desktop">
+  <div class="desktop-icons">
+    @for (app of apps; track app.id) {
+      <app-desktop-icon
+        [label]="app.titleKey | translate"
+        [iconSrc]="app.iconSrc"
+        (activate)="openApp(app)">
+      </app-desktop-icon>
+    }
+  </div>
+
+  <div class="desktop-windows">
+    @for (win of windows(); track win.id) {
+      @if (win.state === 'open') {
+        <app-xp-window
+          [desktopWindow]="win"
+          [class.xp-window--opening]="isPendingOpenAnimation(win.id)"
+          (mousedown)="focusWindow(win.id)"
+          (minimizeClick)="minimizeWindow(win.id)"
+          (closeClick)="closeWindow(win.id)"
+        />
+      }
+    }
+  </div>
+
+  <app-taskbar
+    [windows]="windows()"
+    [apps]="apps"
+    [userName]="userName"
+    (windowTabClick)="toggleWindowFromTaskbar($event)"
+    (appLaunch)="openApp($event)"
+    (logout)="logout()"
+    (turnOff)="turnOff()">
+  </app-taskbar>
+</section>

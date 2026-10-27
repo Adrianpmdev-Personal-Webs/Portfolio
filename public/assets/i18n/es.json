@@ -1,0 +1,169 @@
+{
+  "app": {
+    "name": "Adrianpmdev XP"
+  },
+
+  "common": {
+    "logoAlt": "Logo del portfolio",
+    "avatarAlt": "Avatar de perfil",
+    "actions": {
+      "clickToStart": "haz clic para iniciar",
+      "start": "Inicio",
+      "help": "Ayuda",
+      "language": "Idioma",
+      "logout": "Cerrar sesión",
+      "turnOffComputer": "Apagar equipo"
+    },
+    "status": {
+      "loading": "Cargando...",
+      "time": "Hora actual"
+    },
+    "validation": {
+      "required": "Este campo es obligatorio",
+      "minName": "Introduce al menos 2 caracteres"
+    },
+    "projects": "Proyectos",
+    "description": "Descripción",
+    "images": "Imágenes",
+    "projectStatus": {
+      "online": "En línea",
+      "wip": "En desarrollo"
+    },
+    "languages": {
+      "es": "Español",
+      "en": "Inglés",
+      "fr": "Francés"
+    },
+    "startMenu": {
+      "allPrograms": "Todos los programas",
+      "myComputer": "Mi PC",
+      "myPictures": "Mis imágenes",
+      "internet": "Internet",
+      "helpSupport": "Ayuda y soporte",
+      "search": "Buscar",
+      "run": "Ejecutar...",
+      "back": "Volver"
+    }
+  },
+
+  "login": {
+    "leftHint": "Para comenzar, introduce tu nombre",
+    "subtitle": "Escribe tu nombre para entrar al escritorio",
+    "form": {
+      "nameLabel": "Invitado",
+      "namePlaceholder": "Tu nombre",
+      "submit": "Entrar"
+    },
+    "welcomeMessage": "Bienvenido/a, {{name}}",
+    "footerLeft": "Apagar equipo",
+    "footerRight": "Despues de iniciar sesión podrás acceder al escritorio"
+  },
+
+  "myPc": {
+    "title": "Mis Datos",
+    "sidebar": {
+      "title": "Tareas del sistema",
+      "systemInfo": "Ver información del sistema",
+      "skills": "Ver habilidades principales",
+      "contact": "Opciones de contacto"
+    },
+    "links": {
+      "title": "Enlaces rápidos",
+      "linkedin": "Ver Linkedin",
+      "contact": "Contactar",
+      "cv": "Descargar CV"
+    },
+    "profile": {
+      "title": "Información profesional",
+      "roleValue": "Desarrollador Multiplataforma",
+      "bio": "Desarrollador Fullstack con un perfil proactivo y trabajado; creativo y orientado al trabajo en equipo, con sólidas capacidades de planificación y alta flexibilidad y adaptabilidad para asumir nuevos retos y entornos cambiantes.",
+      "detailsTitle": "Datos básicos",
+      "locationLabel": "Ubicación",
+      "locationValue": "Mérida, Extremadura, España",
+      "emailLabel": "Email",
+      "focusLabel": "Especialización",
+      "birthLabel": "Fecha de nacimiento",
+      "birthValue": "03/07/2000",
+      "phoneLabel": "Telefono"
+    },
+    "skills": {
+      "title": "Stack principal"
+    },
+    "languages": {
+      "title": "Idiomas",
+      "spanish": "Español - Nativo",
+      "english": "Inglés - Alto (sin certificación oficial)"
+    },
+    "career": {
+      "title": "Experiencia y estudios",
+      "experienceTitle": "Experiencia",
+      "experience1": "Plexus Tech - Prácticas (2025 - 2026)",
+      "educationTitle": "Estudios",
+      "education1": "Grado Superior en Desarrollo de Aplicaciones Multiplataforma (Matrícula de Honor)."
+    }
+  },
+
+  "internetExplorer": {
+    "title": "Páginas Web",
+    "toolbar": {
+      "back": "Atrás",
+      "forward": "Adelante",
+      "refresh": "Actualizar",
+      "home": "Inicio",
+      "address": "Dirección",
+      "go": "Ir"
+    },
+    "actions": {
+      "openSite": "Abrir sitio",
+      "viewCode": "Ver código"
+    },
+    "status": {
+      "ready": "Listo",
+      "opening": "Abriendo proyecto...",
+      "hoverOpen": "Abrir despliegue",
+      "hoverRepo": "Abrir repositorio",
+      "projectSelected": "Proyecto seleccionado"
+    },
+    "projects": {
+      "project1": {
+        "title": "The Witcher Web",
+        "summary": "Videojuego sencillo para navegador inspirado en el universo The Witcher: pequeño bucle de juego, gráficos tipo sprite y gestión de estado básica. Realizado como proyecto educativo."
+      },
+      "project2": {
+        "title": "Portfolio",
+        "summary": "Portfolio personal estilo Windows XP que muestra proyectos, habilidades y curriculum, con soporte multilenguaje y detalles visuales ligeros."
+      },
+      "project3": {
+        "title": "Eventvs Mérida",
+        "summary": "Landing Page para la aplicación de Eventvs Mérida, desarrollada como TFG."
+      }
+    }
+  },
+
+  "photoViewer": {
+    "title": "Aplicaciones Móvil",
+    "projects": {
+      "spotify": "Aplicación Android inspirada en Spotify con registro, login, canciones, playlists y perfil. Integra Firebase, Supabase Storage y API de Deezer. Realizado como proyecto educativo.",
+      "eventvs": "Aplicación móvil para descubrir ocio y cultura de Mérida con eventos, mapa, calendario y secciones de interés. Proyecto orientado a TFG."
+    },
+    "shots": {
+      "login": "Pantalla de login",
+      "register": "Pantalla de registro",
+      "home": "Pantalla principal",
+      "profile": "Pantalla de perfil",
+      "splash": "Pantalla de bienvenida",
+      "songs": "Pantalla de canciones",
+      "player": "Pantalla de reproductor",
+      "map": "Pantalla de mapa",
+      "calendar": "Pantalla de calendario",
+      "events": "Pantalla de eventos guardados",
+      "account": "Pantalla de cuenta",
+      "details": "Pantalla de detalles de eventos"
+    }
+  },
+
+  "minesweeper": {
+    "title": "Buscaminas",
+    "touchHint": "Mantén pulsado para poner/quitar una bandera."
+  }
+}

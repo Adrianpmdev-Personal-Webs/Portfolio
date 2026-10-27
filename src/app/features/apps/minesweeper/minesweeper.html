@@ -1,0 +1,40 @@
+<div class="ms-frame">
+  <div class="ms-top">
+    <div class="ms-counter">{{ game.flagsLeft }}</div>
+    <button type="button" class="ms-face" (click)="newGame()">{{ face() }}</button>
+    <div class="ms-counter">{{ formattedTimer }}</div>
+  </div>
+
+  <div class="ms-board">
+    @for (row of game.board; let r = $index; track r) {
+      <div class="ms-row">
+        @for (cell of row; let c = $index; track c) {
+          <button
+            type="button"
+            class="ms-cell"
+            [class.revealed]="cell.revealed"
+            [class.hidden]="!cell.revealed"
+            [class.mine]="cell.revealed && cell.mine"
+            [class.n1]="cell.revealed && cell.adjacent === 1"
+            [class.n2]="cell.revealed && cell.adjacent === 2"
+            [class.n3]="cell.revealed && cell.adjacent === 3"
+            [class.n4]="cell.revealed && cell.adjacent === 4"
+            [class.n5]="cell.revealed && cell.adjacent === 5"
+            [class.n6]="cell.revealed && cell.adjacent === 6"
+            [class.n7]="cell.revealed && cell.adjacent === 7"
+            [class.n8]="cell.revealed && cell.adjacent === 8"
+            (click)="revealCell(r, c)"
+            (contextmenu)="flagCell($event, r, c)"
+            (touchstart)="startLongPress($event, r, c)"
+            (touchend)="endLongPress($event, r, c)"
+            (touchmove)="cancelLongPress()"
+          >
+            {{ cellText(cell) }}
+          </button>
+        }
+      </div>
+    }
+  </div>
+
+  <p class="ms-touch-hint">{{ 'minesweeper.touchHint' | translate }}</p>
+</div>
