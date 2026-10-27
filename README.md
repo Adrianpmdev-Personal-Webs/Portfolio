@@ -26,6 +26,29 @@
 
 <br>
 
+## 📸 Screenshots
+
+<p align="center">
+  <img src="docs/screenshots/desktop-internet-explorer.webp" alt="XP desktop with the Internet Explorer app showing a web project" width="100%">
+</p>
+
+<table>
+  <tr>
+    <td width="40%"><img src="docs/screenshots/photo-viewer.webp" alt="Photo Viewer app showing screenshots of a mobile project"></td>
+    <td width="40%"><img src="docs/screenshots/start-menu.webp" alt="Start menu open over the My Data app"></td>
+    <td width="20%"><img src="docs/screenshots/mobile.webp" alt="Mobile layout with an app in fullscreen"></td>
+  </tr>
+  <tr>
+    <td align="center">Mobile projects in the Photo Viewer</td>
+    <td align="center">Start menu and profile</td>
+    <td align="center">Mobile layout</td>
+  </tr>
+</table>
+
+---
+
+<br>
+
 ## 📖 Description
 
 Personal portfolio built with **Angular** that recreates the visual experience of **Windows XP** in a web format.
@@ -51,15 +74,17 @@ The project combines a retro interface (**boot screen, login, desktop, windows a
 
 ## 🛠️ Tech Stack
 
-| Technology                                                                                                                  | Purpose                                      |
-| --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------- |
-| ![Angular](https://img.shields.io/badge/Angular_21-DD0031?style=flat-square&logo=angular&logoColor=white)                   | Core framework                               |
-| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)             | Typed language                               |
-| ![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=sass&logoColor=white)                               | Styling                                      |
-| ![Angular Material](https://img.shields.io/badge/Angular_Material-009688?style=flat-square&logo=angular&logoColor=white)    | UI components                                |
-| ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=black)                          | Animations                                   |
-| ![ngx-translate](https://img.shields.io/badge/ngx--translate-4285F4?style=flat-square&logo=googletranslate&logoColor=white) | Internationalization (🇪🇸 ES / 🇬🇧 EN / 🇫🇷 FR) |
-| ![RxJS](https://img.shields.io/badge/RxJS-B7178C?style=flat-square&logo=reactivex&logoColor=white)                          | Reactive programming                         |
+| Technology                                                                                                                  | Purpose                                                               |
+| --------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| ![Angular](https://img.shields.io/badge/Angular_21-DD0031?style=flat-square&logo=angular&logoColor=white)                   | Core framework: standalone components, signals, zoneless              |
+| ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)             | Typed language                                                        |
+| ![SCSS](https://img.shields.io/badge/SCSS-CC6699?style=flat-square&logo=sass&logoColor=white)                               | Styling                                                               |
+| ![Angular Material](https://img.shields.io/badge/Angular_Material-009688?style=flat-square&logo=angular&logoColor=white)    | UI components (menus, progress bars, ripples)                         |
+| ![GSAP](https://img.shields.io/badge/GSAP-88CE02?style=flat-square&logo=greensock&logoColor=black)                          | Animations                                                            |
+| ![ngx-translate](https://img.shields.io/badge/ngx--translate-4285F4?style=flat-square&logo=googletranslate&logoColor=white) | Internationalization (🇪🇸 ES / 🇬🇧 EN / 🇫🇷 FR)                          |
+| ![Vercel](https://img.shields.io/badge/Vercel-000000?style=flat-square&logo=vercel&logoColor=white)                         | Hosting and serverless function that forwards visit events to Discord |
+| ![ESLint](https://img.shields.io/badge/ESLint-4B32C3?style=flat-square&logo=eslint&logoColor=white)                         | Linting with angular-eslint rules                                     |
+| ![Prettier](https://img.shields.io/badge/Prettier-F7B93E?style=flat-square&logo=prettier&logoColor=black)                   | Code formatting                                                       |
 
 ---
 
