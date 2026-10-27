@@ -123,7 +123,7 @@ src/app/
 - 🔐 Client-side user session management to control the boot / login / desktop flow.
 - 🎭 Interface focused on the visual experience and the narrative of the portfolio.
 - 📱 **Responsive design**: on mobile, windows are displayed fullscreen and stacked, like native app screens.
-- ⚡ **Signals and OnPush**: component state lives in signals and every component uses `OnPush` change detection.
+- ⚡ **Zoneless, signals and OnPush**: the app runs without `zone.js`; component state lives in signals and every component uses `OnPush` change detection.
 
 ---
 
