@@ -34,13 +34,12 @@
     <div class="xp-panel">
       <h3>{{ 'myPc.links.title' | translate }}</h3>
 
-      <a
-        [href]="profile.linkedinUrl"
-        target="_blank"
-        rel="noopener noreferrer"
-        (click)="logLinkedinClick()"
-      >
+      <a [href]="profile.linkedinUrl" target="_blank" rel="noopener noreferrer" (click)="logLinkedinClick()">
         {{ 'myPc.links.linkedin' | translate }}
+      </a>
+
+      <a [href]="profile.githubUrl" target="_blank" rel="noopener noreferrer">
+        {{ 'myPc.links.github' | translate }}
       </a>
 
       <a [href]="'mailto:' + profile.email">
@@ -90,12 +89,6 @@
               <span>🎂</span>
               <strong>{{ 'myPc.profile.birthLabel' | translate }}:</strong>
               {{ 'myPc.profile.birthValue' | translate }}
-            </p>
-
-            <p>
-              <span>📞</span>
-              <strong>{{ 'myPc.profile.phoneLabel' | translate }}:</strong>
-              {{ profile.phone }}
             </p>
 
             <p>

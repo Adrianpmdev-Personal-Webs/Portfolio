@@ -12,7 +12,7 @@ import { Profile } from './profile';
 export const PROFILE: Profile = {
   fullName: 'Adrián Pérez Morales',
   email: 'adrianperez936@gmail.com',
-  phone: '+34 652 45 87 51',
+  githubUrl: 'https://github.com/adrianpmdev',
   linkedinUrl: 'https://www.linkedin.com/in/adrián-pérez-morales-493784410',
   cvUrl: '/assets/docs/Adrian_Perez.pdf',
 };

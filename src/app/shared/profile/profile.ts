@@ -9,7 +9,7 @@
 export interface Profile {
   fullName: string;
   email: string;
-  phone: string;
+  githubUrl: string;
   linkedinUrl: string;
   cvUrl: string;
 }
