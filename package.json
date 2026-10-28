@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "images": "node scripts/optimize-images.mjs",
     "lint": "ng lint",
     "format": "prettier --write .",
     "format:check": "prettier --check ."
@@ -36,6 +37,7 @@
     "angular-eslint": "21.4.0",
     "eslint": "^10.3.0",
     "prettier": "^3.9.10",
+    "sharp": "^0.35.5",
     "typescript": "~5.9.0",
     "typescript-eslint": "8.59.2"
   },

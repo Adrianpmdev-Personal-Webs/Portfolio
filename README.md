@@ -163,6 +163,25 @@ src/app/
 | `npm run lint`         | ESLint with angular-eslint rules        |
 | `npm run format`       | Format the project with Prettier        |
 | `npm run format:check` | Check formatting without changing files |
+| `npm run images`       | Convert new or replaced images to WebP  |
+
+### 🖼️ Adding or replacing images
+
+1. Drop the image (PNG, JPG, GIF, TIFF or AVIF) into its folder under `public/assets/images/`. To replace an image, use the same name as the current `.webp` (for example `project1.png` replaces `project1.webp`).
+2. Run `npm run images` (add `-- --dry-run` to preview it first). Each image is resized, converted to WebP and the original is deleted.
+3. Reference the `.webp` file in the code; the command lists any file that still points to the original name.
+
+| Folder                   | Result                             |
+| ------------------------ | ---------------------------------- |
+| `system/apps/`           | App icon, 144 × 144 px             |
+| `webs/`                  | Web project preview, 1280 px wide  |
+| `mobile/`                | Mobile screenshot, full resolution |
+| `system/background_xp.*` | Desktop background, 2560 px wide   |
+| `system/logo_xp.*`       | Logo, 440 px wide                  |
+| `system/avatar_xp.*`     | Avatar, 256 × 256 px               |
+| Anywhere else            | Up to 1920 px wide                 |
+
+The favicon, the Apple touch icon and the Open Graph image keep their PNG/JPG format and are never converted.
 
 ---
 
