@@ -13,6 +13,6 @@ export const PROFILE: Profile = {
   fullName: 'Adrián Pérez Morales',
   email: 'adrianperez936@gmail.com',
   githubUrl: 'https://github.com/adrianpmdev',
-  linkedinUrl: 'https://www.linkedin.com/in/adrián-pérez-morales-493784410',
+  linkedinUrl: 'https://www.linkedin.com/in/adrianpmdev',
   cvUrl: '/assets/docs/Adrian_Perez.pdf',
 };

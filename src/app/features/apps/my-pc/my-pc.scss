@@ -136,6 +136,10 @@
   line-height: 1.34;
 }
 
+.xp-bio {
+  white-space: pre-line;
+}
+
 .xp-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);

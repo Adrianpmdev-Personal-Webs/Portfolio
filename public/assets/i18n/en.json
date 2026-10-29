@@ -34,8 +34,7 @@
     },
     "languages": {
       "es": "Spanish",
-      "en": "English",
-      "fr": "French"
+      "en": "English"
     },
     "startMenu": {
       "allPrograms": "All Programs",
@@ -72,13 +71,14 @@
     "links": {
       "title": "Quick Links",
       "linkedin": "View LinkedIn",
+      "github": "View GitHub",
       "contact": "Contact",
       "cv": "Download CV"
     },
     "profile": {
       "title": "Professional Information",
       "roleValue": "Multiplatform Developer",
-      "bio": "Fullstack Developer with a proactive and well-rounded profile; creative and team-oriented, with strong planning skills and a high degree of flexibility and adaptability to take on new challenges and changing environments.",
+      "bio": "I like taking an idea all the way to production: designing the database, building the API, crafting the frontend and getting the app onto someone's phone.\n\nI'm a Higher Technician in Multiplatform Application Development (DAM) and a junior Full Stack developer. I'm currently taking an in-person specialization in Artificial Intelligence and Big Data, and on my own I'm learning game development with Godot.\n\n🔹 The project I'm proudest of: Eventvs Mérida\nA mobile app that brings Mérida's cultural and leisure agenda together in one place. We built it as a team of three for our final project: a Flutter app, a Spring Boot REST API, a Supabase database, an Angular admin panel and landing page, and supporting Python scripts. Over 600 commits and deployed to production.\n\n🔹 Windows XP-style portfolio\nMy portfolio recreates the Windows XP experience in the browser, built with Angular. If you want to get to know my work, start there 😉\n\n🛠️ Stack: Java · Spring Boot · Python · Angular · Flutter/Dart · Supabase · Firebase · Git · Vercel · Render\n\nI'm looking for my next opportunity as a Full Stack, Backend or Mobile developer, where I can contribute from day one and keep learning with a great team.\n\n🌐 Portfolio: adrianpmdev-portfolio.vercel.app\n💻 GitHub: github.com/adrianpmdev\n📩 Write to me here, I reply quickly.",
       "detailsTitle": "Basic Information",
       "locationLabel": "Location",
       "locationValue": "Mérida, Extremadura, Spain",
@@ -101,7 +101,8 @@
       "experienceTitle": "Experience",
       "experience1": "Plexus Tech - Internship (2025 - 2026)",
       "educationTitle": "Education",
-      "education1": "Higher Technician Diploma in Multiplatform Application Development (Honor Distinction)."
+      "education1": "Higher Technician Diploma in Multiplatform Application Development (Honor Distinction) (2024 - 2026).",
+      "education2": "Specialization Course in Artificial Intelligence and Big Data (2026 - Present)."
     }
   },
 

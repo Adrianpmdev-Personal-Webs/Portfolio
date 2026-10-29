@@ -34,8 +34,7 @@
     },
     "languages": {
       "es": "Español",
-      "en": "Inglés",
-      "fr": "Francés"
+      "en": "Inglés"
     },
     "startMenu": {
       "allPrograms": "Todos los programas",
@@ -79,7 +78,7 @@
     "profile": {
       "title": "Información profesional",
       "roleValue": "Desarrollador Multiplataforma",
-      "bio": "Desarrollador Fullstack con un perfil proactivo y trabajado; creativo y orientado al trabajo en equipo, con sólidas capacidades de planificación y alta flexibilidad y adaptabilidad para asumir nuevos retos y entornos cambiantes.",
+      "bio": "Me gusta llevar una idea hasta producción: diseñar la base de datos, montar la API, construir el frontend y que la app acabe en el móvil de alguien.\n\nSoy Técnico Superior en Desarrollo de Aplicaciones Multiplataforma (DAM) y desarrollador Full Stack junior. Ahora mismo estoy cursando una especialización presencial en Inteligencia Artificial y Big Data, y por mi cuenta aprendo desarrollo de videojuegos con Godot.\n\n🔹 Proyecto del que más orgulloso estoy: Eventvs Mérida\nApp móvil que reúne la agenda cultural y de ocio de Mérida en un solo sitio. La desarrollamos en equipo de tres como proyecto final: app en Flutter, API REST en Spring Boot, base de datos en Supabase, panel de administración y landing web en Angular, y scripts de apoyo en Python. Más de 600 commits y desplegada en producción.\n\n🔹 Portfolio estilo Windows XP\nMi portfolio recrea la experiencia de Windows XP en el navegador, hecho con Angular. Si quieres conocer mi trabajo, empieza por ahí 😉\n\n🛠️ Stack: Java · Spring Boot · Python · Angular · Flutter/Dart · Supabase · Firebase · Git · Vercel · Render\n\nBusco mi siguiente oportunidad como desarrollador Full Stack, Backend o Mobile, donde pueda aportar desde el primer día y seguir aprendiendo con un buen equipo.\n\n🌐 Portfolio: adrianpmdev-portfolio.vercel.app\n💻 GitHub: github.com/adrianpmdev\n📩 Escríbeme por aquí, respondo rápido.",
       "detailsTitle": "Datos básicos",
       "locationLabel": "Ubicación",
       "locationValue": "Mérida, Extremadura, España",
@@ -102,7 +101,8 @@
       "experienceTitle": "Experiencia",
       "experience1": "Plexus Tech - Prácticas (2025 - 2026)",
       "educationTitle": "Estudios",
-      "education1": "Grado Superior en Desarrollo de Aplicaciones Multiplataforma (Matrícula de Honor)."
+      "education1": "Grado Superior en Desarrollo de Aplicaciones Multiplataforma (Matrícula de Honor) (2024 - 2026).",
+      "education2": "Curso de Especialización en Inteligencia Artificial y Big Data (2026 - Actualidad)."
     }
   },
 

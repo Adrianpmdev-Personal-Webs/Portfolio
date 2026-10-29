@@ -6,7 +6,7 @@
  * @author adrianpmdev
  */
 
-export const SUPPORTED_LANGUAGES = ['es', 'en', 'fr'] as const;
+export const SUPPORTED_LANGUAGES = ['es', 'en'] as const;
 
 export type Language = (typeof SUPPORTED_LANGUAGES)[number];
 

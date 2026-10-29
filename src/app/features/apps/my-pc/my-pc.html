@@ -34,7 +34,12 @@
     <div class="xp-panel">
       <h3>{{ 'myPc.links.title' | translate }}</h3>
 
-      <a [href]="profile.linkedinUrl" target="_blank" rel="noopener noreferrer" (click)="logLinkedinClick()">
+      <a
+        [href]="profile.linkedinUrl"
+        target="_blank"
+        rel="noopener noreferrer"
+        (click)="logLinkedinClick()"
+      >
         {{ 'myPc.links.linkedin' | translate }}
       </a>
 
@@ -65,7 +70,7 @@
     <div class="my-pc__sections">
       <section class="xp-block">
         <h4>{{ 'myPc.profile.title' | translate }}</h4>
-        <p>{{ 'myPc.profile.bio' | translate }}</p>
+        <p class="xp-bio">{{ 'myPc.profile.bio' | translate }}</p>
       </section>
 
       <section class="xp-grid">
@@ -149,6 +154,7 @@
                 </strong>
               </p>
               <p>{{ 'myPc.career.education1' | translate }}</p>
+              <p>{{ 'myPc.career.education2' | translate }}</p>
             </div>
           </div>
         </div>

@@ -16,7 +16,7 @@ export const WEB_PROJECTS: readonly WebProject[] = [
     titleKey: 'internetExplorer.projects.project1.title',
     summaryKey: 'internetExplorer.projects.project1.summary',
     status: 'online',
-    deployUrl: 'https://the-witcher-web.vercel.app/',
+    deployUrl: 'https://null-pointers-devs.github.io/The-Witcher-JS/',
     previewSrc: '/assets/images/webs/project1.webp',
     stack: ['HTML', 'CSS', 'JS'],
   },
